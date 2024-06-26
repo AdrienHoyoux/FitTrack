@@ -1,4 +1,4 @@
-# myappflutter
+# FitTrack
 
 A new Flutter project.
 
