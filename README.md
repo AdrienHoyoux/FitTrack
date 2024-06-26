@@ -1,6 +1,6 @@
 # FitTrack
 
-## Qu'est ce que FitTrack ? 
+## Qu'est ce que FitTrack ? 🏃
 
 FitTrack est une application mobile conçue pour accompagner les utilisateurs dans l'amélioration de leur condition physique. Grâce à cette application, les utilisateurs peuvent suivre leurs activités physiques telles que le vélo ou la marche en utilisant une carte interactive qui trace leur parcours. FitTrack fournit des informations détaillées telles que la distance parcourue, la vitesse moyenne, le temps écoulé, et plus encore.
 
