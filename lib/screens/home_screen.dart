@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myappflutter/screens/register_screen.dart';
+import 'package:myappflutter/screens/resetpassword_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -146,7 +148,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 220,
                       height: 40,
                       child:TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => ResetPasswordScreen()),
+                          );
+                        },
                         child: Text(
                           'Forgot password?',
                           style: TextStyle(
@@ -159,7 +166,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(height: 40),
                     SizedBox(
                       child: TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => RegisterScreen()),
+                          );
+                        },
                         child: Text(
 
                           'Create an account',
