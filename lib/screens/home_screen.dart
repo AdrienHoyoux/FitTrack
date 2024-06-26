@@ -8,6 +8,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final TextEditingController mailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,13 +61,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       width: 320,
                       child: TextField(
+                        controller: mailController,
                         style: TextStyle(
                           color: Colors.white,
                         ),
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.black38,
-                          hintText: 'username or email...',
+                          hintText: 'Entrer votre adresse mail...',
                           hintStyle: TextStyle(
                             color: Colors.grey,
                           ),
