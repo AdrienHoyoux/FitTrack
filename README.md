@@ -17,13 +17,28 @@
 
 ## 📁 Présentation des principaux dossiers
 
-L'architecture du projet est organisée en plusieurs répertoires principaux :
+### **`classes`**
+Ce répertoire contient les classes représentant les données de l'application. Vous y trouverez les modèles de données utilisés dans toute l'application.
 
-- **`classes`** : Ce répertoire contient les classes représentant les données de l'application. Vous y trouverez les modèles de données utilisés dans toute l'application.
-  
-- **`screens`** : Ce répertoire regroupe les différentes pages de l'application. Chaque page de l'interface utilisateur est définie ici.
-  
-- **`widgets`** : Ce répertoire contient les widgets personnalisés qui sont utilisés dans diverses pages de l'application. Ces widgets sont des composants réutilisables qui facilitent la construction de l'interface utilisateur.
-  
-- **`services`** : Ce répertoire regroupe les interactions avec les services externes, tels que les APIs. Il inclut également les services de gestion de la base de données, l'authentification, et d'autres services essentiels à l'application.
+### **`screens`**
+Ce répertoire regroupe les différentes pages de l'application. Chaque page de l'interface utilisateur est définie ici.
+
+### **`widgets`**
+Ce répertoire contient les widgets personnalisés qui sont utilisés dans diverses pages de l'application. Ces widgets sont des composants réutilisables qui facilitent la construction de l'interface utilisateur.
+
+### **`services`**
+Ce répertoire regroupe les interactions avec les services externes, tels que les APIs. Il inclut également les services de gestion de la base de données, l'authentification, et d'autres services essentiels à l'application.
+
+## Aperçu de la maquette
+
+### **`Page d'acceuil`**
+![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/5cafed3f-316b-4e29-800e-5d92421dae4c)
+
+### **`Page de creation de compte`**
+![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/21b2162e-6261-470c-9a7c-2f8c12c84d43)
+
+### **`Page de réinitialisation du mot de passe`**
+![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3b5a36d3-658e-4063-ab46-63ef810cdf64)
+
+
 
