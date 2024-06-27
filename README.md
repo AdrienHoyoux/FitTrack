@@ -17,11 +17,13 @@
 
 ## 📁 Présentation des principaux dossiers
 
->Concernant l'architecture du projet, on retrouve différent répertoire :
->> Tout d'abord le répertoire classes qui va contenir les classes représentant les données de l'application.
+L'architecture du projet est organisée en plusieurs répertoires principaux :
 
->> Ensuite le répertoire screens qui va correspondre au différentes page de l'application.
+- **`classes`** : Ce répertoire contient les classes représentant les données de l'application. Vous y trouverez les modèles de données utilisés dans toute l'application.
+  
+- **`screens`** : Ce répertoire regroupe les différentes pages de l'application. Chaque page de l'interface utilisateur est définie ici.
+  
+- **`widgets`** : Ce répertoire contient les widgets personnalisés qui sont utilisés dans diverses pages de l'application. Ces widgets sont des composants réutilisables qui facilitent la construction de l'interface utilisateur.
+  
+- **`services`** : Ce répertoire regroupe les interactions avec les services externes, tels que les APIs. Il inclut également les services de gestion de la base de données, l'authentification, et d'autres services essentiels à l'application.
 
->> Pour poursuivre, le répertoire widgets qui corresponds à différents widgets codé qu'on retrouve dans différentes pages.
-
->> Et pour finir le répertoire services qui va regrouper les différentes interactions avec des services externe tels que des APIs.
