@@ -29,15 +29,18 @@ Ce répertoire contient les widgets personnalisés qui sont utilisés dans diver
 ### **`services`**
 Ce répertoire regroupe les interactions avec les services externes, tels que les APIs. Il inclut également les services de gestion de la base de données, l'authentification, et d'autres services essentiels à l'application.
 
-## Aperçu de la maquette
+## 📱 Aperçu de la maquette
 
 ### **`Page d'acceuil`**
+Cette page est l'interface principale que les utilisateurs voient lorsqu'ils ouvrent l'application. Elle offre un accès rapide aux fonctionnalités principales et une navigation intuitive.
 ![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/5cafed3f-316b-4e29-800e-5d92421dae4c)
 
 ### **`Page de creation de compte`**
+Sur cette page, les utilisateurs peuvent créer un nouveau compte en saisissant leurs informations personnelles. La conception se concentre sur la simplicité et la facilité d'utilisation.
 ![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/21b2162e-6261-470c-9a7c-2f8c12c84d43)
 
 ### **`Page de réinitialisation du mot de passe`**
+Cette page permet aux utilisateurs de réinitialiser leur mot de passe en cas d'oubli. Elle guide les utilisateurs à travers un processus sécurisé de récupération de compte.
 ![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3b5a36d3-658e-4063-ab46-63ef810cdf64)
 
 
