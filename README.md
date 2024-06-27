@@ -31,23 +31,34 @@ Ce répertoire regroupe les interactions avec les services externes, tels que le
 
 ## 📱 Aperçu de la maquette
 
-### **`Page d'acceuil`**
-Cette page est l'interface principale que les utilisateurs voient lorsqu'ils ouvrent l'application. 
-Elle offre un accès rapide aux fonctionnalités principales et une navigation intuitive.
+| Page d'accueil | Page de création de compte | Page de réinitialisation du mot de passe |
+|---|---|---|
+| ![Page d'accueil](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/5cafed3f-316b-4e29-800e-5d92421dae4c) | ![Page de création de compte](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/21b2162e-6261-470c-9a7c-2f8c12c84d43) | ![Page de réinitialisation du mot de passe](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3b5a36d3-658e-4063-ab46-63ef810cdf64) |
 
-![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/5cafed3f-316b-4e29-800e-5d92421dae4c)
+### Descriptions
 
-### **`Page de creation de compte`**
-Sur cette page, les utilisateurs peuvent créer un nouveau compte en saisissant leurs informations personnelles. 
-La conception se concentre sur la simplicité et la facilité d'utilisation.
-
-![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/21b2162e-6261-470c-9a7c-2f8c12c84d43)
-
-### **`Page de réinitialisation du mot de passe`**
-Cette page permet aux utilisateurs de réinitialiser leur mot de passe en cas d'oubli.
-Elle guide les utilisateurs à travers un processus sécurisé de récupération de compte.
-
-![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3b5a36d3-658e-4063-ab46-63ef810cdf64)
+- **Page d'accueil** : Cette page est l'interface principale que les utilisateurs voient lorsqu'ils ouvrent l'application. Elle offre un accès rapide aux fonctionnalités principales et une navigation intuitive.
+- **Page de création de compte** : Sur cette page, les utilisateurs peuvent créer un nouveau compte en saisissant leurs informations personnelles. La conception se concentre sur la simplicité et la facilité d'utilisation.
+- **Page de réinitialisation du mot de passe** : Cette page permet aux utilisateurs de réinitialiser leur mot de passe en cas d'oubli. Elle guide les utilisateurs à travers un processus sécurisé de récupération de compte.
 
 
+## 🎯 Objectifs
+
+> ### 1. Suivi interactif du parcours :
+  Permettre aux utilisateurs de suivre leur trajet en temps réel via une carte interactive, affichant leur position et leur itinéraire.
+  
+> ### 2. Fournir des détails sur la course :
+  Offrir des statistiques détaillées telles que la distance parcourue, la vitesse moyenne et le temps écoulé.
+  
+> ### 3. Comparaison des performances :
+ Permettre aux utilisateurs de comparer leurs performances actuelles avec leurs précédentes courses, facilitant ainsi le suivi de leur progression.
+
+> ### 4. Personnalisation des objectifs :
+ Permettre aux utilisateurs de définir des objectifs personnels, tels que des distances à parcourir ou des temps à battre, et de suivre leur progression vers ces objectifs.
+
+> ### 5. Interface utilisateur intuitive :
+  Concevoir une interface conviviale et intuitive, facilitant la navigation et l'utilisation des fonctionnalités de suivi et d'analyse.
+
+> ### 6. Compatibilité multi-plateforme :
+ Assurer une compatibilité optimale avec les appareils iOS et Android, permettant aux utilisateurs de profiter de l'application sur différents appareils.
 
