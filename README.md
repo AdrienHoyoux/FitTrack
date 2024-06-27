@@ -5,7 +5,7 @@
 ![Android](https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white)
 ![IOS](https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white)
 
-## Qu'est ce que FitTrack ? 🏃
+## 🏃 Qu'est ce que FitTrack ? 
 
 >FitTrack est une application mobile conçue pour accompagner les utilisateurs dans l'amélioration de leur condition physique. Grâce à cette application, les utilisateurs peuvent suivre leurs activités physiques telles que le vélo ou la marche en utilisant une carte interactive qui trace leur parcours.
 
@@ -16,3 +16,12 @@
 >FitTrack combine une interface utilisateur intuitive avec diverses fonctionnalités, offrant ainsi une expérience complète et personnalisée pour tous ceux qui cherchent à vivre une vie plus active et en meilleure santé.
 
 ## 📁 Présentation des principaux dossiers
+
+>Concernant l'architecture du projet, on retrouve différent répertoire :
+>> Tout d'abord le répertoire classes qui va contenir les classes représentant les données de l'application.
+
+>> Ensuite le répertoire screens qui va correspondre au différentes page de l'application.
+
+>> Pour poursuivre, le répertoire widgets qui corresponds à différents widgets codé qu'on retrouve dans différentes pages.
+
+>> Et pour finir le répertoire services qui va regrouper les différentes interactions avec des services externe tels que des APIs.
