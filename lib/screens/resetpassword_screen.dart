@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
+
+  static const String routeName = '/resetpassword';
+  ResetPasswordScreen({super.key});
+
   @override
   _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
 }
@@ -10,7 +14,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
   Widget build(BuildContext context){
     return Scaffold(
         appBar: AppBar(
-          title: Text('Reset Password'),
+          title: Text('Réinitialisation du mot de passe'),
         ),
         body: SafeArea(
           child: SingleChildScrollView(
@@ -20,7 +24,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
               children: <Widget>[
                 SizedBox(height: 200),
                 Text(
-                  'Enter your account e-mail address:',
+                  'Saisissez l\'adresse électronique de votre compte :',
                   style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.bold,
@@ -32,7 +36,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     width: 320,
                     child: TextField(
                       decoration: InputDecoration(
-                        labelText: 'Email',
+                        labelText: 'Email...',
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -42,7 +46,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 SizedBox(
                   width: 320,
                   child: Text(
-                    'A password reset link will be sent to your email.',
+                    'Un lien de réinitialisation du mot de passe vous sera envoyé par courrier électronique.',
                     style: TextStyle(
                       fontSize: 15,
                     ),
@@ -54,7 +58,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     width: 320,
                     child: ElevatedButton(
                       onPressed: (){},
-                      child: Text('Confirm'),
+                      child: Text('Confirmer'),
                       style: ElevatedButton.styleFrom(
                         foregroundColor: Colors.white,
                         backgroundColor: Colors.black12,
