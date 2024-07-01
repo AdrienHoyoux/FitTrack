@@ -33,8 +33,8 @@ Ce répertoire regroupe les interactions avec les services externes, tels que le
 
 | Page d'accueil | Page de création de compte | Page de réinitialisation du mot de passe | Page de profil utilisateur | Page de lancement de course |
 |---|---|---|---|---|
-| ![Page d'accueil](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/5cafed3f-316b-4e29-800e-5d92421dae4c) | ![Page de création de compte](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/21b2162e-6261-470c-9a7c-2f8c12c84d43) | ![Page de réinitialisation du mot de passe](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3b5a36d3-658e-4063-ab46-63ef810cdf64) | ![Page de profil utilisateur](![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3cd83b57-a6c1-4b19-80dd-3041fc550269)
- | ![Page de lancement de course](![image](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/421e113a-6e38-40e2-88c9-726fb44e5884)|
+| ![Page d'accueil](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/5cafed3f-316b-4e29-800e-5d92421dae4c) | ![Page de création de compte](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/21b2162e-6261-470c-9a7c-2f8c12c84d43) | ![Page de réinitialisation du mot de passe](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3b5a36d3-658e-4063-ab46-63ef810cdf64) | ![Page de profil utilisateur](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3cd83b57-a6c1-4b19-80dd-3041fc550269) | ![Page de lancement de course](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/421e113a-6e38-40e2-88c9-726fb44e5884) |
+
 
 
 ### Descriptions
