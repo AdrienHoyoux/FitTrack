@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 
-
 class map_component extends StatefulWidget {
 
   @override
@@ -10,7 +9,6 @@ class map_component extends StatefulWidget {
 }
 
 class _map_componentState extends State<map_component> {
-
 
   @override
   Widget build(BuildContext context) {

@@ -8,6 +8,7 @@ import 'package:myappflutter/screens/resetpassword_screen.dart';
 import 'package:myappflutter/screens/settings_screen.dart';
 import 'package:myappflutter/screens/home_screen.dart';
 import 'package:myappflutter/screens/connexion_screen.dart';
+import 'package:myappflutter/screens/userinfo_screen.dart';
 
 var routes = <String, WidgetBuilder>{
   HomeScreen.routeName: (context) => HomeScreen(),
@@ -20,4 +21,5 @@ var routes = <String, WidgetBuilder>{
   ConnexionScreen.routeName: (context) => ConnexionScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
   MainScreen.routeName: (context) => MainScreen(),
+  UserInfoComponent.routeName: (context) => UserInfoComponent(),
 };

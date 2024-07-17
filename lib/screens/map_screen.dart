@@ -37,12 +37,13 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[400],
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              height: 320,
+              height: 360,
               child: map_component(),
             ),
             SizedBox(height: 16),
@@ -50,7 +51,7 @@ class _MapScreenState extends State<MapScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 _buildInfoCard('Distance', '0.0 KM'),
-                _buildInfoCard('Temps', '${_secondsElapsed ~/ 60}:${_secondsElapsed % 60} min'),
+                _buildInfoCard('Temps', '${_secondsElapsed ~/ 3600}:${(_secondsElapsed ~/ 60) %60}:${_secondsElapsed % 60} H'),
               ],
             ),
             SizedBox(height: 16),
@@ -61,13 +62,13 @@ class _MapScreenState extends State<MapScreen> {
                 _buildInfoCard('Calories', '0.0 Kcal'),
               ],
             ),
-            SizedBox(height: 16),
+            SizedBox(height: 10),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Column(
                   children: [
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     IconButton(
                       onPressed: () {
                         setState(() {
@@ -79,7 +80,7 @@ class _MapScreenState extends State<MapScreen> {
                           _isCounting = !_isCounting;
                         });
                       },
-                      icon: Icon(_isCounting ? Icons.stop : Icons.play_arrow, size: 50, color: Colors.white),
+                      icon: Icon(_isCounting ? Icons.stop : Icons.play_arrow, size: 35, color: Colors.white),
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.all(10),
                         shape: RoundedRectangleBorder(
@@ -88,21 +89,21 @@ class _MapScreenState extends State<MapScreen> {
                         backgroundColor: _isCounting ? Colors.red : Colors.blue,
                       ),
                     ),
-                    Text(_isCounting ? 'Arrêter' : 'Commencer', style: TextStyle(color: Colors.black, fontSize: 16)),
+                    Text(_isCounting ? 'Arrêter' : 'Commencer', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold)),
                   ],
                 ),
 
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(height: 10),
+                    SizedBox(height: 20),
                     IconButton(
                       onPressed: () {
                         setState(() {
                           _secondsElapsed = 0;
                         });
                       },
-                      icon: Icon(Icons.refresh, size: 50, color: Colors.white),
+                      icon: Icon(Icons.refresh, size: 35, color: Colors.white),
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.all(10),
                         shape: RoundedRectangleBorder(
@@ -111,16 +112,16 @@ class _MapScreenState extends State<MapScreen> {
                         backgroundColor: Colors.black54,
                       ),
                     ),
-                    Text('Réinitialisé', style: TextStyle(color: Colors.black, fontSize: 16)),
+                    Text('Réinitialisé', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 Column(
                   children: [
-                    SizedBox(height: 10),
+                    SizedBox(height: 20 ),
                     IconButton(
                       onPressed: () {
                       },
-                      icon: Icon(Icons.save, size: 50, color: Colors.white),
+                      icon: Icon(Icons.save, size: 35, color: Colors.white),
                       style: IconButton.styleFrom(
                         padding: EdgeInsets.all(10),
                         shape: RoundedRectangleBorder(
@@ -129,7 +130,7 @@ class _MapScreenState extends State<MapScreen> {
                         backgroundColor: Colors.green,
                       ),
                     ),
-                    Text('Sauvegarder', style: TextStyle(color: Colors.black, fontSize: 16)),
+                    Text('Sauvegarder', style: TextStyle(color: Colors.black, fontSize: 16, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ],
@@ -143,6 +144,7 @@ class _MapScreenState extends State<MapScreen> {
   Widget _buildInfoCard(String title, String value) {
     return Expanded(
       child: Card(
+        margin: EdgeInsets.only(left: 20, right: 20),
         elevation: 3,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
@@ -155,16 +157,16 @@ class _MapScreenState extends State<MapScreen> {
                 title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
-                  fontSize: 24,
-                  color: Colors.blueGrey,
+                  fontSize: 21,
+                  color: Colors.black,
                 ),
               ),
               SizedBox(height: 8),
               Text(
                 value,
                 style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.black54,
+                  fontSize: 18,
+                  color: Colors.black,
                 ),
               ),
             ],

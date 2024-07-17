@@ -1,34 +1,116 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myappflutter/screens/main_screen.dart';
+import 'package:myappflutter/classes/AppUser.dart';
 import 'package:myappflutter/screens/register_screen.dart';
 import 'package:myappflutter/screens/resetpassword_screen.dart';
+import 'package:myappflutter/screens/userinfo_screen.dart';
+import '../services/database_service.dart';
+import 'main_screen.dart';
 
-class ConnexionScreen extends StatelessWidget {
+
+class ConnexionScreen extends StatefulWidget {
   static String routeName = '/connexion';
   ConnexionScreen({super.key});
 
+  @override
+  State<ConnexionScreen> createState() => _ConnexionScreenState();
+}
+
+class _ConnexionScreenState extends State<ConnexionScreen> {
+
+  // ************************************ Instances ************************************ //
+
+  final DatabaseService _dataBaseService = DatabaseService();
+
+  // ************************************* Variables ************************************* //
+
   final TextEditingController mailController = TextEditingController();
+
   final TextEditingController passwordController = TextEditingController();
 
+  String _backgroundURL = '';
+
+  final _formKey = GlobalKey<FormState>();
+
+  // ************************************* Methodes ************************************* //
+  void _connexionUser() async{
+    {
+      if(mailController.text == 'admin' && passwordController.text == 'admin'){
+        Navigator.pushNamed(context, UserInfoComponent.routeName);
+      }
+      else{
+        if (_formKey.currentState!.validate()) {
+          try {
+            await FirebaseAuth.instance.signInWithEmailAndPassword(
+                email: mailController.text,
+                password: passwordController.text
+            );
+
+            Appuser? user = await _dataBaseService.getCurrentUser();
+
+            if(user!.firstConnection!) Navigator.pushNamed(context, UserInfoComponent.routeName);
+            else Navigator.pushNamed(context, MainScreen.routeName);
+
+          }on FirebaseAuthException catch (e) {
+            String message;
+            print("code :" + e.toString());
+            switch(e.code)
+            {
+              case "invalid-credential":
+                message = 'Email et/ou mot de passe incorrects !';
+                break;
+              case "invalid-email":
+                message = 'Veuillez entrer un email valide !';
+                break;
+              default:
+                message = 'Pas de connexion Internet !';
+                break;
+            }
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                duration: Duration(seconds: 5),
+                content: Text(message)));
+          }
+        }
+      }
+    }
+  }
+  @override
+  void initState() {
+    super.initState();
+    _dataBaseService.loadImage("/files/app_assets/homebackground.jpg").then((value) {
+      setState(() {
+        _backgroundURL = value!;
+      });
+    });
+  }
+
+  // ************************************* Scaffold ************************************* //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black45,
+        automaticallyImplyLeading: false,
+      ),
       body: SafeArea(
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/images/homebackground.jpg'),
+            image: _backgroundURL.isNotEmpty
+                ? DecorationImage(
+              image: NetworkImage(_backgroundURL),
               fit: BoxFit.cover,
-            ),
+            )
+                : null,
+            color: _backgroundURL.isEmpty ? Colors.black45 : null,
           ),
           child: SingleChildScrollView(
             child: ConstrainedBox(
               constraints: BoxConstraints(
                 minHeight: MediaQuery.of(context).size.height,
               ),
-              child: IntrinsicHeight(
+              child: Form(
+                key: _formKey,
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
@@ -63,7 +145,13 @@ class ConnexionScreen extends StatelessWidget {
                     SizedBox(height: 20),
                     SizedBox(
                       width: 320,
-                      child: TextField(
+                      child: TextFormField(
+                        validator: (value) {
+                          if (value == null || value.isEmpty || !value.contains('@')) {
+                            return 'Veuillez entrer une adresse e-mail valide';
+                          }
+                          return null;
+                        },
                         controller: mailController,
                         style: TextStyle(
                           color: Colors.white,
@@ -71,6 +159,10 @@ class ConnexionScreen extends StatelessWidget {
                         decoration: InputDecoration(
                           filled: true,
                           fillColor: Colors.black38,
+                          prefixIcon: Icon(
+                            Icons.email,
+                            color: Colors.white,
+                          ),
                           hintText: 'Entrer votre adresse mail...',
                           hintStyle: TextStyle(
                             color: Colors.grey,
@@ -95,8 +187,14 @@ class ConnexionScreen extends StatelessWidget {
                     SizedBox(height: 40),
                     SizedBox(
                       width: 320,
-                      child: TextField(
+                      child: TextFormField(
                         controller: passwordController,
+                        validator: (value) {
+                          if (value == null || value.isEmpty || value.length < 6) {
+                            return 'Veuillez entrer un mot de passe valide !';
+                          }
+                          return null;
+                        },
                         obscureText: true,
                         style: TextStyle(
                           color: Colors.white,
@@ -105,6 +203,10 @@ class ConnexionScreen extends StatelessWidget {
                           filled: true,
                           fillColor: Colors.black38,
                           hintText: 'Entrer votre mot de passe...',
+                          prefixIcon: Icon(
+                            Icons.lock,
+                            color: Colors.white,
+                          ),
                           hintStyle: TextStyle(
                             color: Colors.grey,
                           ),
@@ -130,45 +232,7 @@ class ConnexionScreen extends StatelessWidget {
                       width: 250,
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: () async {
-                          if(mailController.text == 'admin' && passwordController.text == 'admin'){
-                            Navigator.pushNamed(context, MainScreen.routeName);
-                          }
-                          else{
-                            try {
-                              await FirebaseAuth.instance.signInWithEmailAndPassword(
-                                  email: mailController.text,
-                                  password: passwordController.text
-                              );
-                              Navigator.pushNamed(context, MainScreen.routeName);
-                            }on FirebaseAuthException catch (e) {
-                              String message;
-                              print(mailController.text);
-                              print(passwordController.text);
-                              print(e.message);
-                              switch (e.code) {
-                                case 'invalid-email':
-                                  message = 'L\'adresse e-mail n\'est pas valide.';
-                                  break;
-                                case 'user-disabled':
-                                  message = 'Cet utilisateur a été désactivé.';
-                                  break;
-                                case 'user-not-found':
-                                  message = 'Aucun utilisateur trouvé pour cette adresse e-mail.';
-                                  break;
-                                case 'wrong-password':
-                                  message = 'Le mot de passe est incorrect.';
-                                  break;
-                                default:
-                                  message = 'Une erreur inconnue s\'est produite.';
-                              }
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                                  duration: Duration(seconds: 5),
-                                  content: Text(message)));
-                            }
-                          }
-
-                        },
+                        onPressed: _connexionUser,
                       child: Text(
                           'Se connecter',
                           style: TextStyle(
