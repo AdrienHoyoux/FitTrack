@@ -14,33 +14,72 @@ class RaceDetailScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Nom: ${race.name ?? 'Non défini'}',
+        child: Card(
+          elevation: 5,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                ListTile(
+                  leading: Icon(Icons.directions_run),
+                  title: Text(
+                    'Nom',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(race.name ?? 'Non défini'),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.calendar_today),
+                  title: Text(
+                    'Date',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(race.date),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.access_time),
+                  title: Text(
+                    'Durée de la course',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(race.time),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.straighten),
+                  title: Text(
+                    'Distance',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text('${race.distance} km'),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.speed),
+                  title: Text(
+                    'Vitesse',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text('${race.speed} km/h'),
+                ),
+                Divider(),
+                ListTile(
+                  leading: Icon(Icons.local_fire_department),
+                  title: Text(
+                    'Calories dépensées',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text('${race.calories} kcal'),
+                ),
+              ],
             ),
-            SizedBox(height: 10),
-            Text(
-              'Date: ${race.date}',
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Heure: ${race.time}',
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Distance: ${race.distance} km',
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Vitesse: ${race.speed} km/h',
-            ),
-            SizedBox(height: 10),
-            Text(
-              'Calories: ${race.calories} kcal',
-            ),
-          ],
+          ),
         ),
       ),
     );

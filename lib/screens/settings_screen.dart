@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:myappflutter/screens/connexion_screen.dart';
+import 'package:myappflutter/services/database_service.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';
   SettingsScreen({super.key});
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
+
+  DatabaseService _databaseService = DatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -16,103 +20,106 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: AppBar(
         title: Text(
           'Paramètres',
-          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white),
+          style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
-          },),
+          },
+        ),
         backgroundColor: Colors.black,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(10.0),
-        child: ListView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
           children: <Widget>[
-            SizedBox(height: 10.0),
-            buildSettingsCard('Autres', [
-              buildSettingsButton(Icons.info, 'À propos'),
-              buildSettingsButton(Icons.delete_forever, 'Supprimer le compte'),
-              buildSettingsButton(Icons.logout, 'Déconnexion'),
-            ]),
+            SizedBox(height: 20.0),
+            buildSettingsCard(Icons.delete_forever, 'Supprimer le compte', Colors.red, _showDeleteAccountDialog),
+            SizedBox(height: 20.0),
+            buildSettingsCard(Icons.logout, 'Déconnexion', Colors.blue, _showLogoutDialog),
           ],
         ),
       ),
     );
   }
 
-  Widget buildSettingsCard(String title, List<Widget> buttons) {
+  Widget buildSettingsCard(IconData icon, String title, Color color, VoidCallback onPressed) {
     return Card(
       color: Colors.black54,
       elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(title, style: TextStyle(fontSize: 25.0, fontWeight: FontWeight.bold, color: Colors.white)),
-            ...buttons,
-          ],
+      child: ListTile(
+        leading: Icon(icon, color: color, size: 30),
+        title: Text(
+          title,
+          style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.white),
         ),
+        onTap: onPressed,
       ),
     );
   }
 
-  Widget buildSettingsButton(IconData icon, String title) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10.0),
-      child: TextButton(
-        onPressed: () {
-          switch(title){
-            case 'Déconnexion':
-              _showDialog(context,'Déconnexion','Voulez-vous vraiment vous déconnecter ?','Annuler','Déconnexion');
-              break;
+  void _showLogoutDialog() {
+    _showDialog(
+      context,
+      'Déconnexion',
+      'Voulez-vous vraiment vous déconnecter ?',
+      'Annuler',
+      'Déconnexion',
+      ConnexionScreen.routeName,
+    );
+  }
 
-            case 'Supprimer le compte':
-              _showDialog(context,'Suppression du compte','Voulez-vous vraiment supprimer votre compte ?','Annuler','Supprimer');
-              break;
+  void _showDeleteAccountDialog() {
+    _showDialog(
+      context,
+      'Suppression du compte',
+      'Voulez-vous vraiment supprimer votre compte ?',
+      'Annuler',
+      'Supprimer',
+      ConnexionScreen.routeName,
+    );
+  }
 
-          }
+  Future<void> _showDialog(
+    BuildContext context,
+    String title,
+    String content,
+    String action1,
+    String action2,
+    String routeName,
+    )
+    {
+      return showDialog<void>(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(content),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text(action1),
+              ),
+              TextButton(
+                onPressed: () {
+                  if(title == 'Suppression du compte') {
+                    print('Suppression du compte');
+                    _databaseService.deleteUser();
+                  } else if(title == 'Déconnexion') {
+                    print('Déconnexion');
+                    _databaseService.signOut();
+                  }
+                  Navigator.pushNamed(context, routeName);
+                },
+                child: Text(action2),
+              ),
+            ],
+          );
         },
-        style: TextButton.styleFrom(
-          padding: const EdgeInsets.all(15.0),
-          backgroundColor: Colors.white30,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-        ),
-        child: Row(
-          children: [
-            Icon(icon, color: Colors.white),
-            SizedBox(width: 20.0),
-            Text(title, style: TextStyle(fontSize: 16.0, color: Colors.white, fontStyle: FontStyle.italic)),
-          ],
-        ),
-      ),
-    );
-  }
-  Future<void> _showDialog(BuildContext context, String title, String content, String action1, String action2) {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(title),
-          content: Text(content),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text(action1),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.pushNamed(context, ConnexionScreen.routeName);
-              },
-              child: Text(action2),
-            ),
-          ],
-        );
-      },
-    );
-  }
+      );
+    }
 }

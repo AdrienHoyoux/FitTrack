@@ -76,58 +76,60 @@ class _SaveRaceScreenState extends State<SaveRaceScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(20),
-                    child: Column(
-                      children: [
-                        Text(
-                          'Sauvegarder votre course',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 50),
-                        textFormField_saveScreen('Entrer le nom de la course...', Icons.sports_score_outlined, false, _nameController, ''),
-                        SizedBox(height: 20),
-                        textFormField_saveScreen('Distance: ', Icons.directions_run_outlined, true, _distanceController, 'm'),
-                        SizedBox(height: 20),
-                        textFormField_saveScreen('Durée: ', Icons.timer_outlined, true, _timeController, ''),
-                        SizedBox(height: 20),
-                        textFormField_saveScreen('Vitesse: ', Icons.speed_outlined, true, _speedController, 'km/h'),
-                        SizedBox(height: 20),
-                        textFormField_saveScreen('Calories: ', Icons.monitor_weight_outlined, true, _caloriesController, 'kcal'),
-                        SizedBox(height: 40),
-                        ElevatedButton(
-                          onPressed: () {
-                            save_onPressed();
-                          },
-                          style: ElevatedButton.styleFrom(
-                            elevation: 5.0,
-                            backgroundColor: Colors.grey,
-                            foregroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                            textStyle: TextStyle(
-                              fontSize: 24,
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: [
+                    Container(
+                      padding: EdgeInsets.all(20),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Sauvegarder votre course',
+                            style: TextStyle(
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
-                          child: Text('Sauvegarder'),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
+                          SizedBox(height: 50),
+                          textFormField_saveScreen('Entrer le nom de la course...', Icons.sports_score_outlined, false, _nameController, ''),
+                          SizedBox(height: 20),
+                          textFormField_saveScreen('Distance: ', Icons.directions_run_outlined, true, _distanceController, 'm'),
+                          SizedBox(height: 20),
+                          textFormField_saveScreen('Durée: ', Icons.timer_outlined, true, _timeController, ''),
+                          SizedBox(height: 20),
+                          textFormField_saveScreen('Vitesse: ', Icons.speed_outlined, true, _speedController, 'km/h'),
+                          SizedBox(height: 20),
+                          textFormField_saveScreen('Calories: ', Icons.monitor_weight_outlined, true, _caloriesController, 'kcal'),
+                          SizedBox(height: 40),
+                          ElevatedButton(
+                            onPressed: () {
+                              save_onPressed();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              elevation: 5.0,
+                              backgroundColor: Colors.grey,
+                              foregroundColor: Colors.white,
+                              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                              textStyle: TextStyle(
+                                fontSize: 24,
+                              ),
+                            ),
+                            child: Text('Sauvegarder'),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

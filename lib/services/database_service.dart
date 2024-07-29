@@ -183,4 +183,24 @@ class DatabaseService {
     }
   }
 
+  Future<void> deleteUserAccount() async {
+    try {
+      FA.User? firebaseUser = _auth.currentUser;
+      if (firebaseUser != null) {
+        String uid = firebaseUser.uid;
+        await _usersRef.doc(uid).delete();
+        await firebaseUser.delete();
+      }
+    } catch (e) {
+      print("Erreur lors de la suppression du compte utilisateur : $e");
+    }
+  }
+
+  Future<void> userSignOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      print("Erreur lors de la déconnexion de l'utilisateur : $e");
+    }
+  }
 }

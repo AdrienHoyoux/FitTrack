@@ -9,8 +9,7 @@ import '../classes/race.dart';
 import '../notifier/courseStateNotifier.dart';
 
 class MapScreen extends StatefulWidget {
-  static const routeName = '/map';
-
+  static const String routeName = '/map';
   @override
   State<MapScreen> createState() => _MapScreenState();
 }
