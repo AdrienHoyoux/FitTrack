@@ -37,38 +37,62 @@ Ce répertoire contient une classe qui étend la classe `ChangeNotifier` de Flut
 Ce répertoire contient les différentes routes de l'application. Ces grâce à ces routes que l'on peut naviguer entre les différentes pages de l'application.
 
 ## 📱 Aperçu de la maquette
-![Page de connexion](imageReadme/ConnexionScreen.png)
-**Page de connexion** : C'est la première page que les utilisateurs voient lorsqu'ils ouvrent l'application. Elle permet aux utilisateurs de se connecter à leur compte en saisissant leur adresse e-mail et leur mot de passe. Elle propose également un lien pour réinitialiser le mot de passe en cas d'oubli et un lien pour se créér un compte en cas de besoin.
 
-![Page de création de compte](imageReadme/userInfoScreen.png)
-**Page de première connexion** : Lors de la première connexion cette page est affichée à l'utilisateur pour complété son profil. Via cette page l'utilisateur sere obligé de remplir certains champs comme son nom, son prénom, sa date de naissance et son poids. Il pourra également ajouter une biographie et une photo s'il le souhaite.
+<div style="text-align:center">
+<img src="imageReadme/ConnexionScreen.png" alt="Page de connexion" width="300"/>
+</div>
+**Page de connexion** : C'est la première page que les utilisateurs voient lorsqu'ils ouvrent l'application. Elle permet aux utilisateurs de se connecter à leur compte en saisissant leur adresse e-mail et leur mot de passe. Elle propose également un lien pour réinitialiser le mot de passe en cas d'oubli et un lien pour se créer un compte en cas de besoin.
 
-![Page de profil utilisateur](imageReadme/UserProfileScreen.png)
-**Page de profil utilisateur** : Cette page permet à l'utilisateur de voir et de modifier son profil. Il pourra voir son nom, son age, sa biographie et son poids. Il pourra également modifier son poids.
+<div style="text-align:center">
+<img src="imageReadme/userInfoScreen.png" alt="Page de première connexion" width="300"/>
+</div>
+**Page de première connexion** : Lors de la première connexion, cette page est affichée à l'utilisateur pour compléter son profil. Via cette page, l'utilisateur sera obligé de remplir certains champs comme son nom, son prénom, sa date de naissance et son poids. Il pourra également ajouter une biographie et une photo s'il le souhaite.
 
-![Page de création de compte](imageReadme/CreateAccountScreen.png)
+<div style="text-align:center">
+<img src="imageReadme/UserProfileScreen.png" alt="Page de profil utilisateur" width="300"/>
+</div>
+**Page de profil utilisateur** : Cette page permet à l'utilisateur de voir et de modifier son profil. Il pourra voir son nom, son âge, sa biographie et son poids. Il pourra également modifier son poids.
+
+<div style="text-align:center">
+<img src="imageReadme/CreateAccountScreen.png" alt="Page de création de compte" width="300"/>
+</div>
 **Page de création de compte** : Sur cette page, les utilisateurs peuvent créer un nouveau compte en saisissant leurs informations personnelles. La conception se concentre sur la simplicité et la facilité d'utilisation.
 
-![Page de réinitialisation du mot de passe](imageReadme/ResetPasswordScreen.png)
+<div style="text-align:center">
+<img src="imageReadme/ResetPasswordScreen.png" alt="Page de réinitialisation du mot de passe" width="300"/>
+</div>
 **Page de réinitialisation du mot de passe** : Cette page permet aux utilisateurs de réinitialiser leur mot de passe en cas d'oubli. Elle guide les utilisateurs à travers un processus sécurisé de récupération de compte.
 
-![Écran d'accueil](imageReadme/homeScreen.png)
-**Page d'accueil**: Cette page est celle que l'utilisateur voit lorsqu'il est connecté à son compte. Elle affiche la partie introduction de ce readme afin de présenter l'application à l'utilisateur.
+<div style="text-align:center">
+<img src="imageReadme/homeScreen.png" alt="Écran d'accueil" width="300"/>
+</div>
+**Page d'accueil** : Cette page est celle que l'utilisateur voit lorsqu'il est connecté à son compte. Elle affiche la partie introduction de ce README afin de présenter l'application à l'utilisateur.
 
-![Page des paramètres](imageReadme/SettingsScreen.png)
+<div style="text-align:center">
+<img src="imageReadme/SettingsScreen.png" alt="Page des paramètres" width="300"/>
+</div>
 **Page des paramètres** : Cette page permet à l'utilisateur de se déconnecter de son compte ou de supprimer son compte.
 
-![Page de lancement d'une course](imageReadme/mapScreen.jpg)
-**Page de lancement d'une course** : comme son nom l'indique cette page va permettre à l'utilisateur de lancer une course. Cette dernière est composée de 2 widgets, la carte (basé sur OSM) qui va afficher le parcours de l'utilisateur et la statistique de la course effectuée qui seront mis à jour en temps réel. Quand l'utilisateur le décidera il pourra enregistrer sa course ou la mettre en pause ou même l'annuler.
+<div style="text-align:center">
+<img src="imageReadme/mapScreen.jpg" alt="Page de lancement d'une course" width="300"/>
+</div>
+**Page de lancement d'une course** : Comme son nom l'indique, cette page permet à l'utilisateur de lancer une course. Elle est composée de deux widgets : la carte (basée sur OSM) qui affiche le parcours de l'utilisateur et les statistiques de la course effectuée, mises à jour en temps réel. Quand l'utilisateur le décidera, il pourra enregistrer sa course, la mettre en pause ou même l'annuler.
 
-![Page d'eneregistrement d'une course](imageReadme/SaveraceScreen.png)
+<div style="text-align:center">
+<img src="imageReadme/SaveraceScreen.png" alt="Page d'enregistrement de la course" width="300"/>
+</div>
 **Page d'enregistrement de la course** : Cette page permet à l'utilisateur de sauvegarder sa course. Il pourra également voir les statistiques de sa course, lui ajouter un nom et les enregistrer dans la base de données.
 
-![Page des courses effectuées](imageReadme/HistoryScreen.png)
-**Page des courses effectuées** : Cette page permet à l'utilisateur de voir les différentes courses qu'il a effectuées. Il pourra voir les statistiques de chaque course lors du clic sur l'une d'elle.
+<div style="text-align:center">
+<img src="imageReadme/HistoryScreen.png" alt="Page des courses effectuées" width="300"/>
+</div>
+**Page des courses effectuées** : Cette page permet à l'utilisateur de voir les différentes courses qu'il a effectuées. Il pourra voir les statistiques de chaque course en cliquant sur l'une d'elles.
 
-![Page des statistiques d'une course](imageReadme/DetailRaceScreen.png)
-**Page des statistique d'une course** : Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées.
+<div style="text-align:center">
+<img src="imageReadme/DetailRaceScreen.png" alt="Page des statistiques d'une course" width="300"/>
+</div>
+**Page des statistiques d'une course** : Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées.
+
 
 
 ## 🎯 Objectifs
