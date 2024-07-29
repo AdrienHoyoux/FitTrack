@@ -98,11 +98,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
             return Center(child: CircularProgressIndicator());
           }
           else if(snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return SnackBar(content: Text('Erreur : ${snapshot.error}'));
           }
           else if (snapshot.hasData) {
             Appuser? user = snapshot.data;
-            print("User : ${user.toString()}" );
           if (user != null) {
             return SingleChildScrollView(
               child: Column(
@@ -198,9 +197,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                   ),
                                   onChanged: (value) async {
-                                    if(_formkey.currentState!.validate()){
+                                    if(_formkey.currentState!.validate()) {
                                       user.weight = value;
-                                      await _databaseService.updateUser(user);
                                     }
                                   },
                                 ),
@@ -229,27 +227,45 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   onChanged: (value) async {
                                     if(_formkey.currentState!.validate()){
                                       user.biography = value;
-                                      await _databaseService.updateUser(user);
                                     }
                                   },
                                 ),
                               ],
                             ),
                           ),
+
                         ],
                       ),
                     )
                   ),
+                  SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () async {
+                      Navigator.pop(context);
+                      await _databaseService.updateUser(user);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 5.0,
+                      backgroundColor: Colors.grey,
+                      foregroundColor: Colors.white,
+                      padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                      textStyle: TextStyle(
+                        fontSize: 24,
+                      ),
+                    ),
+                    child: Text('Enregistrer',style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
+                  ),
+                  SizedBox(height: 20),
                 ],
               ),
             );
           }
           else {
-            return Center(child: Text('No user data'));
+            return Center(child: Text('Pas de données utilisateur trouvées'));
           }
           }
           else {
-            return Center(child: Text('No user logged in'));
+            return Center(child: Text('Pas de d\'utilisateur trouvé'));
           }
 
         },

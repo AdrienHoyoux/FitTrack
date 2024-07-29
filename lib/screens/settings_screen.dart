@@ -29,15 +29,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         padding: const EdgeInsets.all(10.0),
         child: ListView(
           children: <Widget>[
-            buildSettingsCard('Compte', [
-              buildSettingsButton(Icons.lock, 'Modifier le mot de passe'),
-              buildSettingsButton(Icons.email, 'Changer d\'adresse mail'),
-            ]),
-            SizedBox(height: 10.0),
-            buildSettingsCard('Préférences', [
-              buildSettingsButton(Icons.language, 'Langue'),
-              buildSettingsButton(Icons.palette, 'Thème'),
-            ]),
             SizedBox(height: 10.0),
             buildSettingsCard('Autres', [
               buildSettingsButton(Icons.info, 'À propos'),

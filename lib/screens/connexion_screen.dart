@@ -28,7 +28,6 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
 
   final TextEditingController passwordController = TextEditingController();
 
-  String _backgroundURL = '';
 
   final _formKey = GlobalKey<FormState>();
 
@@ -74,14 +73,12 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
       }
     }
   }
+
   @override
-  void initState() {
-    super.initState();
-    _dataBaseService.loadImage("/files/app_assets/homebackground.jpg").then((value) {
-      setState(() {
-        _backgroundURL = value!;
-      });
-    });
+  void dispose() {
+    super.dispose();
+    mailController.dispose();
+    passwordController.dispose();
   }
 
   // ************************************* Scaffold ************************************* //
@@ -96,13 +93,10 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
         child: Container(
           width: double.infinity,
           decoration: BoxDecoration(
-            image: _backgroundURL.isNotEmpty
-                ? DecorationImage(
-              image: NetworkImage(_backgroundURL),
+            image: DecorationImage(
+              image: AssetImage("lib/assets/images/homebackground.jpg"),
               fit: BoxFit.cover,
-            )
-                : null,
-            color: _backgroundURL.isEmpty ? Colors.black45 : null,
+            ),
           ),
           child: SingleChildScrollView(
             child: ConstrainedBox(

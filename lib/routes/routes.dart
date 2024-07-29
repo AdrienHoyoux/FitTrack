@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myappflutter/classes/race.dart';
 import 'package:myappflutter/screens/main_screen.dart';
 import 'package:myappflutter/screens/map_screen.dart';
 import 'package:myappflutter/screens/performance_screen.dart';
 import 'package:myappflutter/screens/profile_screen.dart';
 import 'package:myappflutter/screens/register_screen.dart';
 import 'package:myappflutter/screens/resetpassword_screen.dart';
+import 'package:myappflutter/screens/saverace_screen.dart';
 import 'package:myappflutter/screens/settings_screen.dart';
 import 'package:myappflutter/screens/home_screen.dart';
 import 'package:myappflutter/screens/connexion_screen.dart';
@@ -22,4 +24,7 @@ var routes = <String, WidgetBuilder>{
   ProfileScreen.routeName: (context) => ProfileScreen(),
   MainScreen.routeName: (context) => MainScreen(),
   UserInfoComponent.routeName: (context) => UserInfoComponent(),
-};
+  SaveRaceScreen.routeName: (context) {
+    final Race course = ModalRoute.of(context)!.settings.arguments as Race;
+    return SaveRaceScreen(course: course);
+  },};
