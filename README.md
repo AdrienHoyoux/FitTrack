@@ -64,7 +64,7 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 **Page de réinitialisation du mot de passe** : Cette page permet aux utilisateurs de réinitialiser leur mot de passe en cas d'oubli. Elle guide les utilisateurs à travers un processus sécurisé de récupération de compte.
 
 <div style="text-align:center">
-<img src="imageReadme/homeScreen.png" alt="Écran d'accueil" width="300"/>
+<img src="imageReadme/HomeScreen.png" alt="Écran d'accueil" width="300"/>
 </div>
 **Page d'accueil** : Cette page est celle que l'utilisateur voit lorsqu'il est connecté à son compte. Elle affiche la partie introduction de ce README afin de présenter l'application à l'utilisateur.
 
@@ -84,7 +84,7 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 **Page d'enregistrement de la course** : Cette page permet à l'utilisateur de sauvegarder sa course. Il pourra également voir les statistiques de sa course, lui ajouter un nom et les enregistrer dans la base de données.
 
 <div style="text-align:center">
-<img src="imageReadme/HistoryScreen.png" alt="Page des courses effectuées" width="300"/>
+<img src="imageReadme/PerformanceScreen.png" alt="Page des courses effectuées" width="300"/>
 </div>
 **Page des courses effectuées** : Cette page permet à l'utilisateur de voir les différentes courses qu'il a effectuées. Il pourra voir les statistiques de chaque course en cliquant sur l'une d'elles.
 
