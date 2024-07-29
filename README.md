@@ -37,44 +37,39 @@ Ce répertoire contient une classe qui étend la classe `ChangeNotifier` de Flut
 Ce répertoire contient les différentes routes de l'application. Ces grâce à ces routes que l'on peut naviguer entre les différentes pages de l'application.
 
 ## 📱 Aperçu de la maquette
-| Page d'accueil | Page de création de compte | Page de réinitialisation du mot de passe | Page de profil utilisateur | Page de lancement de course | Page des paramètres
-|---|---|---|---|---|---|
-| ![Page d'accueil](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/5cafed3f-316b-4e29-800e-5d92421dae4c) | ![Page de création de compte](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/21b2162e-6261-470c-9a7c-2f8c12c84d43) | ![Page de réinitialisation du mot de passe](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3b5a36d3-658e-4063-ab46-63ef810cdf64) | ![Page de profil utilisateur](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/3cd83b57-a6c1-4b19-80dd-3041fc550269) | ![Page de lancement de course](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/421e113a-6e38-40e2-88c9-726fb44e5884) | ![Page de paramètre](https://github.com/AdrienHoyoux/myappflutter/assets/100146992/b27f005d-d45c-4221-803e-0252dadd4e66)
+![Page de connexion](imageReadme/ConnexionScreen.png)
+**Page de connexion** : C'est la première page que les utilisateurs voient lorsqu'ils ouvrent l'application. Elle permet aux utilisateurs de se connecter à leur compte en saisissant leur adresse e-mail et leur mot de passe. Elle propose également un lien pour réinitialiser le mot de passe en cas d'oubli et un lien pour se créér un compte en cas de besoin.
 
+![Page de création de compte](imageReadme/userInfoScreen.png)
+**Page de première connexion** : Lors de la première connexion cette page est affichée à l'utilisateur pour complété son profil. Via cette page l'utilisateur sere obligé de remplir certains champs comme son nom, son prénom, sa date de naissance et son poids. Il pourra également ajouter une biographie et une photo s'il le souhaite.
 
-### Descriptions des pages
+![Page de profil utilisateur](imageReadme/UserProfileScreen.png)
+**Page de profil utilisateur** : Cette page permet à l'utilisateur de voir et de modifier son profil. Il pourra voir son nom, son age, sa biographie et son poids. Il pourra également modifier son poids.
 
-- **Page de connexion** : C'est la première page que les utilisateurs voient lorsqu'ils ouvrent l'application. Elle permet aux utilisateurs de se connecter à leur compte en saisissant leur adresse e-mail et leur mot de passe. Elle propose également un lien pour réinitialiser le mot de passe en cas d'oubli et un lien pour se créér un compte en cas de besoin.
+![Page de création de compte](imageReadme/CreateAccountScreen.png)
+**Page de création de compte** : Sur cette page, les utilisateurs peuvent créer un nouveau compte en saisissant leurs informations personnelles. La conception se concentre sur la simplicité et la facilité d'utilisation.
 
+![Page de réinitialisation du mot de passe](imageReadme/ResetPasswordScreen.png)
+**Page de réinitialisation du mot de passe** : Cette page permet aux utilisateurs de réinitialiser leur mot de passe en cas d'oubli. Elle guide les utilisateurs à travers un processus sécurisé de récupération de compte.
 
-- **Page de première connexion** : Lors de la première connexion cette page est affichée à l'utilisateur pour complété son profil. Via cette page l'utilisateur sere obligé de remplir certains champs comme son nom, son prénom, sa date de naissance et son poids. Il pourra également ajouter une biographie et une photo s'il le souhaite.
+![Écran d'accueil](imageReadme/homeScreen.png)
+**Page d'accueil**: Cette page est celle que l'utilisateur voit lorsqu'il est connecté à son compte. Elle affiche la partie introduction de ce readme afin de présenter l'application à l'utilisateur.
 
+![Page des paramètres](imageReadme/SettingsScreen.png)
+**Page des paramètres** : Cette page permet à l'utilisateur de se déconnecter de son compte ou de supprimer son compte.
 
-- **Page de création de compte** : Sur cette page, les utilisateurs peuvent créer un nouveau compte en saisissant leurs informations personnelles. La conception se concentre sur la simplicité et la facilité d'utilisation.
+![Page de lancement d'une course](imageReadme/mapScreen.jpg)
+**Page de lancement d'une course** : comme son nom l'indique cette page va permettre à l'utilisateur de lancer une course. Cette dernière est composée de 2 widgets, la carte (basé sur OSM) qui va afficher le parcours de l'utilisateur et la statistique de la course effectuée qui seront mis à jour en temps réel. Quand l'utilisateur le décidera il pourra enregistrer sa course ou la mettre en pause ou même l'annuler.
 
+![Page d'eneregistrement d'une course](imageReadme/SaveraceScreen.png)
+**Page d'enregistrement de la course** : Cette page permet à l'utilisateur de sauvegarder sa course. Il pourra également voir les statistiques de sa course, lui ajouter un nom et les enregistrer dans la base de données.
 
-- **Page de réinitialisation du mot de passe** : Cette page permet aux utilisateurs de réinitialiser leur mot de passe en cas d'oubli. Elle guide les utilisateurs à travers un processus sécurisé de récupération de compte.
+![Page des courses effectuées](imageReadme/HistoryScreen.png)
+**Page des courses effectuées** : Cette page permet à l'utilisateur de voir les différentes courses qu'il a effectuées. Il pourra voir les statistiques de chaque course lors du clic sur l'une d'elle.
 
+![Page des statistiques d'une course](imageReadme/DetailRaceScreen.png)
+**Page des statistique d'une course** : Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées.
 
-- **Page principale**: Cette page est celle que l'utilisateur voit lorsqu'il est connecté à son compte. Elle affiche la partie introduction de ce readme afin de présenter l'application à l'utilisateur.
-
-
-- **Page de lancement d'une course** : comme son nom l'indique cette page va permettre à l'utilisateur de lancer une course. Cette dernière est composée de 2 widgets, la carte (basé sur OSM) qui va afficher le parcours de l'utilisateur et la statistique de la course effectuée qui seront mis à jour en temps réel. Quand l'utilisateur le décidera il pourra enregistrer sa course ou la mettre en pause ou même l'annuler.
-
-
-- **Page d'enregistrement de la course** : Cette page permet à l'utilisateur de sauvegarder sa course. Il pourra également voir les statistiques de sa course, lui ajouter un nom et les enregistrer dans la base de données.
-
-
-- **Page des courses effectuées** : Cette page permet à l'utilisateur de voir les différentes courses qu'il a effectuées. Il pourra voir les statistiques de chaque course lors du clic sur l'une d'elle.
-
-
-- **Page des statistique d'une course** : Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées.
-
-
-- **Page de profil utilisateur** : Cette page permet à l'utilisateur de voir et de modifier son profil. Il pourra voir son nom, son age, sa biographie et son poids. Il pourra également modifier son poids.
-
-
-- **Page des paramètres** : Cette page permet à l'utilisateur de se déconnecter de son compte ou de supprimer son compte.
 
 ## 🎯 Objectifs
 > ### 1. Suivi interactif du parcours :
@@ -95,3 +90,11 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 > ### 6. Compatibilité multi-plateforme :
  Assurer une compatibilité optimale avec les appareils iOS et Android, permettant aux utilisateurs de profiter de l'application sur différents appareils.
 
+
+## 📝 Fonctionnalités
+
+## 🔍 Etude de l'existant
+
+## 🛠️ Outils
+
+## ⚙️ Compilation du projet
