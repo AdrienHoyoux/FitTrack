@@ -92,8 +92,8 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 
 <div style="text-align:center">
   <img src="imageReadme/DetailRaceScreen.png" alt="Page des statistiques d'une course" width="300"/>
+    <h1>Page des statistiques d'une course :</h1> <p>Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées.</p>
 </div>
-**Page des statistiques d'une course** : Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées.
 
 
 
