@@ -1,12 +1,14 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:myappflutter/classes/AppUser.dart';
+import 'package:myappflutter/classes/app_user.dart';
 import 'package:myappflutter/screens/register_screen.dart';
 import 'package:myappflutter/screens/resetpassword_screen.dart';
 import 'package:myappflutter/screens/userinfo_screen.dart';
 import '../services/database_service.dart';
+import '../widgets/button/action _button.dart';
+import '../widgets/button/custom_text_button.dart';
+import '../widgets/field/emailField.dart';
+import '../widgets/field/passwordField.dart';
 import 'main_screen.dart';
-
 
 class ConnexionScreen extends StatefulWidget {
   static String routeName = '/connexion';
@@ -32,43 +34,37 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   final _formKey = GlobalKey<FormState>();
 
   // ************************************* Methodes ************************************* //
-  void _connexionUser() async{
-    {
-      if(mailController.text == 'admin' && passwordController.text == 'admin'){
-        Navigator.pushNamed(context, UserInfoComponent.routeName);
-      }
-      else{
-        if (_formKey.currentState!.validate()) {
-          try {
-            await FirebaseAuth.instance.signInWithEmailAndPassword(
-                email: mailController.text,
-                password: passwordController.text
-            );
+  void _connexionUser() async {
+    if (mailController.text == 'admin' && passwordController.text == 'admin') {
+      Navigator.pushNamed(context, UserInfoComponent.routeName);
+    } else {
+      if (_formKey.currentState!.validate()) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Connexion en cours...'),
+          ),
+        );
 
-            Appuser? user = await _dataBaseService.getCurrentUser();
+        bool userConnected = await _dataBaseService.signInUser(
+          mailController.text,
+          passwordController.text,
+        );
 
-            if(user!.firstConnection!) Navigator.pushNamed(context, UserInfoComponent.routeName);
-            else Navigator.pushNamed(context, MainScreen.routeName);
+        if (userConnected == true) {
+          Appuser? appUser = await _dataBaseService.getCurrentUser();
 
-          }on FirebaseAuthException catch (e) {
-            String message;
-            print("code :" + e.toString());
-            switch(e.code)
-            {
-              case "invalid-credential":
-                message = 'Email et/ou mot de passe incorrects !';
-                break;
-              case "invalid-email":
-                message = 'Veuillez entrer un email valide !';
-                break;
-              default:
-                message = 'Pas de connexion Internet !';
-                break;
-            }
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                duration: Duration(seconds: 5),
-                content: Text(message)));
+          if (appUser != null && appUser.firstConnection!) {
+            Navigator.pushNamed(context, UserInfoComponent.routeName);
+          } else {
+            Navigator.pushNamed(context, MainScreen.routeName);
           }
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text('Email et/ou mot de passe incorrects !'),
+              duration: Duration(seconds: 5),
+            ),
+          );
         }
       }
     }
@@ -81,7 +77,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
     passwordController.dispose();
   }
 
-  // ************************************* Scaffold ************************************* //
+  // ************************************* SCAFFOLD ************************************* //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -137,156 +133,37 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                       ),
                     ),
                     SizedBox(height: 20),
-                    SizedBox(
-                      width: 320,
-                      child: TextFormField(
-                        validator: (value) {
-                          if (value == null || value.isEmpty || !value.contains('@')) {
-                            return 'Veuillez entrer une adresse e-mail valide';
-                          }
-                          return null;
-                        },
-                        controller: mailController,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.black38,
-                          prefixIcon: Icon(
-                            Icons.email,
-                            color: Colors.white,
-                          ),
-                          hintText: 'Entrer votre adresse mail...',
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.black87, width: 2.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 2.0),
-                          ),
-                        ),
-                      ),
+                    EmailField(controller: mailController,showLabel: false,showTooltip: false,),
+                    PasswordField(controller: passwordController,showLabel: false,showTooltip: false),
+                    ActionButton(
+                      onPressed: _connexionUser,
+                      text: 'Se connecter',
+                      backgroundColor: Colors.black12,
+                      foregroundColor: Colors.white,
+                      borderColor: Colors.blueGrey,
                     ),
                     SizedBox(height: 40),
-                    SizedBox(
-                      width: 320,
-                      child: TextFormField(
-                        controller: passwordController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty || value.length < 6) {
-                            return 'Veuillez entrer un mot de passe valide !';
-                          }
-                          return null;
-                        },
-                        obscureText: true,
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.black38,
-                          hintText: 'Entrer votre mot de passe...',
-                          prefixIcon: Icon(
-                            Icons.lock,
-                            color: Colors.white,
-                          ),
-                          hintStyle: TextStyle(
-                            color: Colors.grey,
-                          ),
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(20),
-                            borderSide: BorderSide(
-                              color: Colors.white,
-                            ),
-                          ),
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.black87, width: 2.0),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            borderSide: BorderSide(color: Colors.white, width: 2.0),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 60),
-                    SizedBox(
-                      width: 250,
-                      height: 50,
-                      child: ElevatedButton(
-                        onPressed: _connexionUser,
-                      child: Text(
-                          'Se connecter',
-                          style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white,
-                          ),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black12,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            side: BorderSide(
-                              width: 2,
-                              color: Colors.blueGrey,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40),
-                    SizedBox(
-                      width: 220,
-                      height: 40,
-                      child:TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, ResetPasswordScreen.routeName);
-
-                        },
-                        child: Text(
-                          'Mot de passe oublié ?',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.white,
-                            decorationThickness: 2,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
+                    CustomTextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, ResetPasswordScreen.routeName);
+                      },
+                      text: 'Mot de passe oublié ?',
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.white,
+                      decorationThickness: 2,
+                      textColor: Colors.white,
                     ),
                     SizedBox(height: 20),
-                    SizedBox(
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, RegisterScreen.routeName);
-                        },
-                        child: Text(
-
-                          'Créer un compte',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            decorationColor: Colors.lightBlueAccent[100],
-                            decorationThickness: 2,
-                            fontSize: 16,
-                            color: Colors.lightBlueAccent[100],
-                          ),
-                        ),
-                      ),
-                      ),
-
+                    CustomTextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, RegisterScreen.routeName);
+                      },
+                      text: 'Créer un compte',
+                      decoration: TextDecoration.underline,
+                      decorationColor: Colors.lightBlueAccent[100]!,
+                      decorationThickness: 2,
+                      textColor: Colors.lightBlueAccent[100]!,
+                    )
                   ],
                 ),
               ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:myappflutter/screens/saverace_screen.dart';
-import 'package:myappflutter/widgets/courseStat_component.dart';
-import 'package:myappflutter/widgets/map_component.dart';
+import 'package:myappflutter/widgets/component/courseStat_component.dart';
+import 'package:myappflutter/widgets/component/map_component.dart';
 import 'package:provider/provider.dart';
 
 import '../classes/race.dart';

@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:myappflutter/services/database_service.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
-import '../notifier/courseStateNotifier.dart';
+import '../../notifier/courseStateNotifier.dart';
 
 class MapComponent extends StatefulWidget {
   @override

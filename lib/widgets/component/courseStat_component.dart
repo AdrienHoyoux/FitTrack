@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:myappflutter/notifier/courseStateNotifier.dart';
 import 'package:provider/provider.dart';

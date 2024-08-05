@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 
 import '../services/database_service.dart';
 import '../screens/main_screen.dart';
-import '../classes/AppUser.dart';
+import '../classes/app_user.dart';
 
 class UserInfoComponent extends StatefulWidget {
   static const String routeName = '/userinfo';
@@ -69,7 +69,7 @@ class _UserInfoComponentState extends State<UserInfoComponent> {
           firstName: _firstNameController.text,
           biography: _bioController.text,
           weight: _weightController.text,
-          birth_date: _dateController.text,
+          birthDate: _dateController.text,
           firstConnection: false,
           imageURL: pickedFile != null ? pickedFile!.path : '',
         ),

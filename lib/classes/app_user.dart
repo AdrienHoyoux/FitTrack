@@ -4,7 +4,7 @@ class Appuser{
    String? firstName;
    String? weight;
    String? biography;
-   String? birth_date;
+   String? birthDate;
    bool? firstConnection;
    String? imageURL;
 
@@ -13,7 +13,7 @@ class Appuser{
      this.firstName,
      this.weight,
      this.biography,
-     this.birth_date,
+     this.birthDate,
      this.firstConnection,
      this.imageURL
   });
@@ -24,7 +24,7 @@ class Appuser{
       firstName: json['firstName'],
       weight: json['weight'],
       biography: json['objective'],
-      birth_date: json['birth_date'],
+      birthDate: json['birth_date'],
       firstConnection: json['firstConnection'],
       imageURL: json['imageURL']
     );
@@ -36,13 +36,13 @@ class Appuser{
       'firstName': firstName,
       'weight': weight,
       'objective': biography,
-      'birth_date': birth_date,
+      'birth_date': birthDate,
       'firstConnection': firstConnection,
       'imageURL': imageURL
     };
   }
   @override
   String toString() {
-    return 'Appuser(imageURL: $imageURL, name: $name, firstName: $firstName, weight: $weight, biography, $biography, birth_date : $birth_date)'; // Ajoute d'autres champs si nécessaire
+    return 'Appuser(imageURL: $imageURL, name: $name, firstName: $firstName, weight: $weight, biography, $biography, birth_date : $birthDate)'; // Ajoute d'autres champs si nécessaire
   }
 }

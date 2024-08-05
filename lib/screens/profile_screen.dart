@@ -2,7 +2,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import '../classes/AppUser.dart';
+import '../classes/app_user.dart';
 import '../services/database_service.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -56,7 +56,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         setState(() {
           _biographyController.text = value.biography!;
           _weightController.text = value.weight!;
-          _ageController.text = calculAge(value.birth_date!);
+          _ageController.text = calculAge(value.birthDate!);
         });
       }
     });

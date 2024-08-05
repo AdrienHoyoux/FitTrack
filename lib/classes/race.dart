@@ -1,4 +1,3 @@
-import 'package:myappflutter/classes/AppUser.dart';
 
 class Race {
   String? _name;

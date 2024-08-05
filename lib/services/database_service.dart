@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart' as FA;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:myappflutter/classes/race.dart';
-import '../classes/AppUser.dart';
+import '../classes/app_user.dart';
 
 const String USERS_COLLECTION_REF = 'users';
 const String RACES_COLLECTION_REF = 'races';
@@ -19,7 +19,6 @@ class DatabaseService {
   static final _firebase_storage = FirebaseStorage.instance.ref();
 
   // **************************** VARIABLES **************************** //
-  UploadTask? _uploadTask;
   static final _usersRef = _firestore.collection(USERS_COLLECTION_REF).withConverter<Appuser>(fromFirestore: (snapshots, _) => Appuser.fromJson(snapshots.data()!), toFirestore: (user, _) => user.toJson());
 
   // **************************** CONSTRUCTEUR **************************** //
@@ -30,6 +29,32 @@ class DatabaseService {
 
   factory DatabaseService() {
     return _instance;
+  }
+
+  Future<bool> signInUser(String email, String password) async {
+    try {
+      await FA.FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return true;
+    } on FA.FirebaseAuthException catch (e) {
+      print("Erreur lors de la connexion de l'utilisateur : $e");
+      return false;
+    }
+  }
+
+  Future<bool> registerUser(String email, String password) async {
+    try {
+      await FA.FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      return true;
+    } on FA.FirebaseAuthException catch (e) {
+      print("Erreur lors de la création de l'utilisateur : $e");
+      return false;
+    }
   }
 
   Future<void> addUser(Appuser user) async {
