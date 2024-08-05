@@ -13,24 +13,17 @@ import 'main_screen.dart';
 class ConnexionScreen extends StatefulWidget {
   static String routeName = '/connexion';
   ConnexionScreen({super.key});
-
   @override
   State<ConnexionScreen> createState() => _ConnexionScreenState();
 }
 
 class _ConnexionScreenState extends State<ConnexionScreen> {
-
   // ************************************ Instances ************************************ //
-
   final DatabaseService _dataBaseService = DatabaseService();
 
   // ************************************* Variables ************************************* //
-
   final TextEditingController mailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
-
-
   final _formKey = GlobalKey<FormState>();
 
   // ************************************* Methodes ************************************* //
@@ -69,7 +62,6 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
       }
     }
   }
-
   @override
   void dispose() {
     super.dispose();

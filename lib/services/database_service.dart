@@ -33,7 +33,7 @@ class DatabaseService {
 
   Future<bool> signInUser(String email, String password) async {
     try {
-      await FA.FirebaseAuth.instance.signInWithEmailAndPassword(
+      await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -46,13 +46,25 @@ class DatabaseService {
 
   Future<bool> registerUser(String email, String password) async {
     try {
-      await FA.FirebaseAuth.instance.createUserWithEmailAndPassword(
+      await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
       return true;
     } on FA.FirebaseAuthException catch (e) {
       print("Erreur lors de la création de l'utilisateur : $e");
+      return false;
+    }
+  }
+
+  Future<bool> resetPassword(String email) async{
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return true;
+    } on FA.FirebaseAuthException catch (err) {
+      return false;
+    }
+    catch (err) {
       return false;
     }
   }
@@ -100,6 +112,9 @@ class DatabaseService {
     }
     return null;
   }
+
+
+
 
   Future<void> updateUser(Appuser user) async {
     try {

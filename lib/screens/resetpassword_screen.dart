@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:myappflutter/widgets/field/emailField.dart';
+
+import '../services/database_service.dart';
 
 class ResetPasswordScreen extends StatefulWidget {
 
@@ -6,10 +9,14 @@ class ResetPasswordScreen extends StatefulWidget {
   ResetPasswordScreen({super.key});
 
   @override
-  _ResetPasswordScreenState createState() => _ResetPasswordScreenState();
+  State<ResetPasswordScreen> createState() => _ResetPasswordScreenState();
 }
 
 class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
+  final TextEditingController mailController = TextEditingController();
+
+  final DatabaseService _dataBaseService = DatabaseService();
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -21,9 +28,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
         ),
         body: SafeArea(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(16.0), // Ajout d'un padding global
+            padding: EdgeInsets.all(16.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start, // Alignement à gauche pour éviter que le texte ne dépasse
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 SizedBox(height: 60),
                 Text(
@@ -36,22 +43,7 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                 ),
                 SizedBox(height: 20),
                 Center(
-                  child: SizedBox(
-                    width: 320,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Email...',
-                        filled: true,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blue),
-                        ),
-                        prefixIcon: Icon(Icons.email),
-                      ),
-                    ),
-                  ),
+                  child: EmailField(controller: mailController,showLabel: true,showTooltip: true,)
                 ),
                 SizedBox(height: 20),
                 Text(
@@ -69,7 +61,9 @@ class _ResetPasswordScreenState extends State<ResetPasswordScreen> {
                     width: 320,
                     height: 50,
                     child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: () async {
+                        await _dataBaseService.resetPassword(mailController.text);
+                      },
                       child: Text('Confirmer', style: TextStyle(fontSize: 25)),
                       style: ElevatedButton.styleFrom(
                         elevation: 5.0,
