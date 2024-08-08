@@ -6,21 +6,22 @@ import 'package:myappflutter/widgets/component/map_component.dart';
 import 'package:provider/provider.dart';
 
 import '../classes/race.dart';
-import '../notifier/courseStateNotifier.dart';
+import '../notifier/course_state_notifier.dart';
 
 class MapScreen extends StatefulWidget {
   static const String routeName = '/map';
+  MapScreen({Key? key}) : super(key: key);
   @override
   State<MapScreen> createState() => _MapScreenState();
 }
 
 class _MapScreenState extends State<MapScreen> {
 
-  void _toggleRecording(courseStateNotifier notifier) {
+  void _toggleRecording(CourseStateNotifier notifier) {
     notifier.isRecording = true;
   }
 
-  void _stopRecording(courseStateNotifier notifier) {
+  void _stopRecording(CourseStateNotifier notifier) {
     notifier.isPaused = true;
     showDialog(
       barrierDismissible: false,
@@ -90,9 +91,9 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (BuildContext context) => courseStateNotifier(false, false),
+      create: (BuildContext context) => CourseStateNotifier(false, false),
       child: Scaffold(
-        body: Consumer<courseStateNotifier>(
+        body: Consumer<CourseStateNotifier>(
           builder: (context, notifier, child) {
             return Column(
               children: [

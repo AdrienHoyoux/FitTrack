@@ -10,18 +10,18 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const myApp());
+  runApp(const FitTrack());
 }
 
-class myApp extends StatelessWidget {
-  const myApp({super.key});
+class FitTrack extends StatelessWidget {
+  const FitTrack({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'FitTrack',
-      home: ConnexionScreen(),
+      home:  ConnexionScreen(),
       initialRoute: ConnexionScreen.routeName,
       routes: routes,
     );

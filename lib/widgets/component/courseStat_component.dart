@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myappflutter/notifier/courseStateNotifier.dart';
+import 'package:myappflutter/notifier/course_state_notifier.dart';
 import 'package:provider/provider.dart';
 
 class CourseStat extends StatefulWidget {
@@ -40,7 +40,7 @@ class _CourseStatState extends State<CourseStat> {
 
   @override
   Widget build(BuildContext context) {
-    courseStateNotifier courseState = Provider.of<courseStateNotifier>(context);
+    CourseStateNotifier courseState = Provider.of<CourseStateNotifier>(context);
     _durationController.text = formatDuration(courseState.duration);
     _speedController.text = '${courseState.speed.toStringAsFixed(2)} km/h';
     _caloriesController.text = '${courseState.calories.toStringAsFixed(2)} kcal';

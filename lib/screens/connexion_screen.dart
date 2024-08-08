@@ -3,6 +3,7 @@ import 'package:myappflutter/classes/app_user.dart';
 import 'package:myappflutter/screens/register_screen.dart';
 import 'package:myappflutter/screens/resetpassword_screen.dart';
 import 'package:myappflutter/screens/userinfo_screen.dart';
+import '../classes/firebase_exception.dart';
 import '../services/database_service.dart';
 import '../widgets/button/action _button.dart';
 import '../widgets/button/custom_text_button.dart';
@@ -12,12 +13,13 @@ import 'main_screen.dart';
 
 class ConnexionScreen extends StatefulWidget {
   static String routeName = '/connexion';
-  ConnexionScreen({super.key});
+   ConnexionScreen({super.key});
   @override
   State<ConnexionScreen> createState() => _ConnexionScreenState();
 }
 
 class _ConnexionScreenState extends State<ConnexionScreen> {
+
   // ************************************ Instances ************************************ //
   final DatabaseService _dataBaseService = DatabaseService();
 
@@ -25,25 +27,25 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
   final TextEditingController mailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  static late AuthStatus _status;
+  bool waiting = false;
 
   // ************************************* Methodes ************************************* //
   void _connexionUser() async {
+    setState(() {
+      waiting = true;
+    });
     if (mailController.text == 'admin' && passwordController.text == 'admin') {
       Navigator.pushNamed(context, UserInfoComponent.routeName);
-    } else {
+    }
+    else {
       if (_formKey.currentState!.validate()) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Connexion en cours...'),
-          ),
-        );
-
-        bool userConnected = await _dataBaseService.signInUser(
+        _status = await _dataBaseService.signInUser(
           mailController.text,
           passwordController.text,
         );
 
-        if (userConnected == true) {
+        if (_status == AuthStatus.successful) {
           Appuser? appUser = await _dataBaseService.getCurrentUser();
 
           if (appUser != null && appUser.firstConnection!) {
@@ -51,17 +53,23 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
           } else {
             Navigator.pushNamed(context, MainScreen.routeName);
           }
-        } else {
+        }
+        else {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Email et/ou mot de passe incorrects !'),
-              duration: Duration(seconds: 5),
+              content: Text(AuthExceptionHandler.generateErrorMessage(_status), style: const TextStyle(color: Colors.white, fontSize: 16)),
+              duration: const Duration(seconds: 3),
+              backgroundColor: Colors.red,
             ),
           );
         }
       }
     }
+    setState(() {
+      waiting = false;
+    });
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -69,7 +77,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
     passwordController.dispose();
   }
 
-  // ************************************* SCAFFOLD ************************************* //
+  // ************************************* Widgets ************************************* //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +88,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
       body: SafeArea(
         child: Container(
           width: double.infinity,
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage("lib/assets/images/homebackground.jpg"),
               fit: BoxFit.cover,
@@ -96,8 +104,8 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.max,
                   children: <Widget>[
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       'Bienvenue sur FitTrack',
                       style: TextStyle(
                         fontSize: 30,
@@ -105,16 +113,16 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    Text(
+                    const SizedBox(height: 20),
+                    const Text(
                       'Votre application de suivi sportif !',
                       style: TextStyle(
                         fontSize: 20,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 40),
-                    Text(
+                    const SizedBox(height: 40),
+                    const Text(
                       'Connexion',
                       style: TextStyle(
                         decoration: TextDecoration.underline,
@@ -124,7 +132,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     EmailField(controller: mailController,showLabel: false,showTooltip: false,),
                     PasswordField(controller: passwordController,showLabel: false,showTooltip: false),
                     ActionButton(
@@ -134,7 +142,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                       foregroundColor: Colors.white,
                       borderColor: Colors.blueGrey,
                     ),
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     CustomTextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, ResetPasswordScreen.routeName);
@@ -145,7 +153,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                       decorationThickness: 2,
                       textColor: Colors.white,
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     CustomTextButton(
                       onPressed: () {
                         Navigator.pushNamed(context, RegisterScreen.routeName);
@@ -155,6 +163,14 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
                       decorationColor: Colors.lightBlueAccent[100]!,
                       decorationThickness: 2,
                       textColor: Colors.lightBlueAccent[100]!,
+                    ),
+                    const SizedBox(height: 20),
+                    Center(
+                      child: waiting
+                          ? const CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                      )
+                          : null,
                     )
                   ],
                 ),

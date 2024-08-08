@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart' as FA;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:myappflutter/classes/firebase_exception.dart';
 import 'package:myappflutter/classes/race.dart';
 import '../classes/app_user.dart';
 
@@ -31,41 +32,43 @@ class DatabaseService {
     return _instance;
   }
 
-  Future<bool> signInUser(String email, String password) async {
+  Future<AuthStatus> signInUser(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return true;
+      return AuthStatus.successful;
     } on FA.FirebaseAuthException catch (e) {
-      print("Erreur lors de la connexion de l'utilisateur : $e");
-      return false;
+      print("Erreur lors de la connexion de l'utilisateur :" + e.code);
+      return AuthExceptionHandler.handleAuthException(e);
     }
   }
 
-  Future<bool> registerUser(String email, String password) async {
+  Future<AuthStatus> registerUser(String email, String password) async {
     try {
       await _auth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
-      return true;
+      return AuthStatus.successful;
     } on FA.FirebaseAuthException catch (e) {
-      print("Erreur lors de la création de l'utilisateur : $e");
-      return false;
+      return AuthExceptionHandler.handleAuthException(e);
     }
   }
 
-  Future<bool> resetPassword(String email) async{
+  Future<AuthStatus> resetPassword(String email) async{
     try {
-      await _auth.sendPasswordResetEmail(email: email);
-      return true;
+      await _auth
+          .sendPasswordResetEmail(email: email);
+
+      return AuthStatus.successful;
+
     } on FA.FirebaseAuthException catch (err) {
-      return false;
+      return AuthExceptionHandler.handleAuthException(err);
     }
-    catch (err) {
-      return false;
+    catch(e){
+      return AuthStatus.unknown;
     }
   }
 
@@ -115,7 +118,6 @@ class DatabaseService {
 
 
 
-
   Future<void> updateUser(Appuser user) async {
     try {
       FA.User? firebaseUser = _auth.currentUser;
@@ -133,13 +135,10 @@ class DatabaseService {
   Future<String?> loadImage(String path) async {
     try {
       final url = await _firebase_storage.child(path).getDownloadURL();
-      if (url != null) {
-        return url;
-      } else {
-        return null;
-      }
+      return url;
     } catch (e) {
-      print("Erreur lors du chargement de l'image : $e");
+      print('Error loading image: $e');
+      return null;
     }
   }
 
@@ -220,27 +219,6 @@ class DatabaseService {
     } catch (e) {
       print("Erreur lors de la récupération des courses : $e");
       return [];
-    }
-  }
-
-  Future<void> deleteUserAccount() async {
-    try {
-      FA.User? firebaseUser = _auth.currentUser;
-      if (firebaseUser != null) {
-        String uid = firebaseUser.uid;
-        await _usersRef.doc(uid).delete();
-        await firebaseUser.delete();
-      }
-    } catch (e) {
-      print("Erreur lors de la suppression du compte utilisateur : $e");
-    }
-  }
-
-  Future<void> userSignOut() async {
-    try {
-      await _auth.signOut();
-    } catch (e) {
-      print("Erreur lors de la déconnexion de l'utilisateur : $e");
     }
   }
 }

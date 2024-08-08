@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:myappflutter/classes/race.dart';
+import 'package:myappflutter/widgets/button/action%20_button.dart';
+import 'package:myappflutter/widgets/field/saverace_field.dart';
 import '../services/database_service.dart';
 
 class SaveRaceScreen extends StatefulWidget {
   static const routeName = '/saveRace';
   final Race course;
-
   SaveRaceScreen({required this.course});
-
   @override
   State<SaveRaceScreen> createState() => _SaveRaceScreenState();
 }
 
 class _SaveRaceScreenState extends State<SaveRaceScreen> {
+
   // ******************************** VARIABLES ******************************** //
   final _formKey = GlobalKey<FormState>();
   TextEditingController _nameController = TextEditingController();
@@ -21,38 +22,16 @@ class _SaveRaceScreenState extends State<SaveRaceScreen> {
   TextEditingController _timeController = TextEditingController();
   TextEditingController _speedController = TextEditingController();
   TextEditingController _caloriesController = TextEditingController();
+  bool waiting = false;
 
+  // ******************************** INSTANCES ******************************** //
   DatabaseService _databaseService = DatabaseService();
 
   // ******************************** METHODES ******************************** //
-  Widget textFormField_saveScreen(String label, IconData icon, bool isReadOnly, TextEditingController controller, String unite) {
-    return TextFormField(
-      validator: (value) {
-        if ((value == null || value.isEmpty) && !isReadOnly ) {
-          return 'Veuillez entrer un nom pour votre course !';
-        }
-        return null;
-      },
-      readOnly: isReadOnly,
-      controller: controller,
-      style: TextStyle(color: Colors.black),
-      decoration: InputDecoration(
-        labelText: label,
-        suffixText: unite,
-        labelStyle: TextStyle(color: Colors.grey),
-        icon: Icon(icon),
-        filled: true,
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide.none,
-        ),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.blue),
-        ),
-      ),
-    );
-  }
-
   void save_onPressed() async {
+    setState(() {
+      waiting = true;
+    });
     if (_formKey.currentState!.validate()) {
       widget.course.name = _nameController.text;
       await _databaseService.addRace(widget.course);
@@ -60,6 +39,9 @@ class _SaveRaceScreenState extends State<SaveRaceScreen> {
     } else {
       SnackBar(content: Text('Veuillez entrer un nom pour votre course !'));
     }
+    setState(() {
+      waiting = false;
+    });
   }
 
   @override
@@ -97,30 +79,27 @@ class _SaveRaceScreenState extends State<SaveRaceScreen> {
                             ),
                           ),
                           SizedBox(height: 50),
-                          textFormField_saveScreen('Entrer le nom de la course...', Icons.sports_score_outlined, false, _nameController, ''),
+                          SaveraceField(label: 'Entrer le nom de la course...', icon: Icons.sports_score_outlined, isReadOnly: false, controller: _nameController, unite: ''),
                           SizedBox(height: 20),
-                          textFormField_saveScreen('Distance: ', Icons.directions_run_outlined, true, _distanceController, 'm'),
+                          SaveraceField(label: 'Distance: ', icon: Icons.directions_run_outlined, isReadOnly: true, controller:_distanceController, unite: 'm'),
                           SizedBox(height: 20),
-                          textFormField_saveScreen('Durée: ', Icons.timer_outlined, true, _timeController, ''),
+                          SaveraceField(label: 'Durée', icon: Icons.timer_outlined, isReadOnly: true, controller: _timeController, unite: ''),
                           SizedBox(height: 20),
-                          textFormField_saveScreen('Vitesse: ', Icons.speed_outlined, true, _speedController, 'km/h'),
+                          SaveraceField(label: 'Vitesse: ', icon: Icons.speed_outlined, isReadOnly: true, controller: _speedController, unite: 'km/h'),
                           SizedBox(height: 20),
-                          textFormField_saveScreen('Calories: ', Icons.monitor_weight_outlined, true, _caloriesController, 'kcal'),
+                          SaveraceField(label: 'Calories: ', icon:  Icons.monitor_weight_outlined, isReadOnly: true, controller: _caloriesController, unite: 'kcal'),
                           SizedBox(height: 40),
-                          ElevatedButton(
-                            onPressed: () {
-                              save_onPressed();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              elevation: 5.0,
-                              backgroundColor: Colors.grey,
-                              foregroundColor: Colors.white,
-                              padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                              textStyle: TextStyle(
-                                fontSize: 24,
-                              ),
-                            ),
-                            child: Text('Sauvegarder'),
+                          ActionButton(
+                              onPressed: save_onPressed,
+                              text: 'Sauvegarder',
+                          ),
+                          SizedBox(height: 20),
+                          Center(
+                            child: waiting
+                                ? CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                                  )
+                                : null,
                           ),
                         ],
                       ),

@@ -1,25 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:myappflutter/widgets/field/emailField.dart';
+import '../classes/firebase_exception.dart';
 import '../services/database_service.dart';
 import '../classes/app_user.dart';
 import '../widgets/button/action _button.dart';
 import '../widgets/field/passwordField.dart';
+
 class RegisterScreen extends StatefulWidget {
   static const String routeName = '/register';
-  RegisterScreen({super.key});
-
+   RegisterScreen({super.key});
   @override
   State<RegisterScreen> createState() => _RegisterScreenState();
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
 
+  // ************************************* Variables ************************************* //
   final TextEditingController mailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  static late AuthStatus _status;
+  bool waiting = false;
+
+  // ************************************ Instances ************************************ //
   DatabaseService _databaseService = DatabaseService();
 
-
+  // ************************************* Methodes ************************************* //
   @override
   void dispose() {
     mailController.dispose();
@@ -28,19 +34,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   }
 
   void _registerUser() async {
+    setState(() {
+      waiting = true;
+    });
     if (_formKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Votre compte est en cours de création...'),
-        ),
-      );
-
-      bool userCreated = await _databaseService.registerUser(
+      _status = await _databaseService.registerUser(
         mailController.text,
         passwordController.text,
       );
 
-      if (userCreated) {
+      if (_status == AuthStatus.successful) {
         await _databaseService.addUser(Appuser(
           name: '',
           firstName: '',
@@ -55,15 +58,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
       else {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Échec de la création de compte'),
-            duration: Duration(seconds: 10),
+            content: Text(AuthExceptionHandler.generateErrorMessage(_status), style: TextStyle(color: Colors.white, fontSize: 16)),
+            duration: Duration(seconds: 3),
             backgroundColor: Colors.red,
           ),
         );
       }
     }
+    setState(() {
+      waiting = false;
+    });
   }
 
+  // ************************************* Widgets ************************************* //
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +100,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     borderColor: Colors.transparent,
                     elevation: 5.0,
                   ),
+                ),
+                SizedBox(height: 20),
+                Center(
+                  child: waiting
+                      ? CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                      )
+                      : null,
                 )
               ],
             ),

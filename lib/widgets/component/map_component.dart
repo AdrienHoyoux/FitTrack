@@ -5,7 +5,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:myappflutter/services/database_service.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
-import '../../notifier/courseStateNotifier.dart';
+import '../../notifier/course_state_notifier.dart';
 
 class MapComponent extends StatefulWidget {
   @override
@@ -73,8 +73,8 @@ class MapComponentState extends State<MapComponent> {
     return _positions.length > 1 ? _positions.last : null;
   }
 
-  void _startLocationUpdates(courseStateNotifier courseState) {
-    _timer = Timer.periodic(Duration(seconds: 5), (timer) {
+  void _startLocationUpdates(CourseStateNotifier courseState) {
+    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
       _determinePosition().then((value) {
         setState(() {
           _currentPosition = value;
@@ -83,7 +83,7 @@ class MapComponentState extends State<MapComponent> {
           courseState.speed = _currentPosition!.speed * 3.6;
 
           if (courseState.isRecording && !courseState.isPaused) {
-            _activeDuration += Duration(seconds: 5);
+            _activeDuration += const Duration(seconds: 5);
           }
           calculCalorie(courseState);
           _mapController.move(LatLng(_currentPosition!.latitude, _currentPosition!.longitude),18.0);
@@ -94,7 +94,7 @@ class MapComponentState extends State<MapComponent> {
     });
   }
 
-  void _handleCourseStateChange(courseStateNotifier courseState) {
+  void _handleCourseStateChange(CourseStateNotifier courseState) {
     if (courseState.isRecording && !courseState.isPaused) {
       if (_timer == null) {
         if (_positions.isEmpty && _currentPosition != null) {
@@ -118,7 +118,7 @@ class MapComponentState extends State<MapComponent> {
     }
   }
 
-  void calculCalorie(courseStateNotifier courseState) {
+  void calculCalorie(CourseStateNotifier courseState) {
     double met;
 
     if (courseState.speed < 8) {
@@ -170,7 +170,7 @@ class MapComponentState extends State<MapComponent> {
 
   @override
   Widget build(BuildContext context) {
-    final courseState = Provider.of<courseStateNotifier>(context);
+    final courseState = Provider.of<CourseStateNotifier>(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       _handleCourseStateChange(courseState);
@@ -181,16 +181,16 @@ class MapComponentState extends State<MapComponent> {
         future: _userWeightFuture,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Erreur: ${snapshot.error}'));
           } else if (!snapshot.hasData) {
-            return Center(child: Text('Poids non disponible'));
+            return const Center(child: Text('Poids non disponible'));
           } else {
             _userWeight = snapshot.data!;
 
             return _currentPosition == null
-                ? Padding(
+                ? const Padding(
                     padding: EdgeInsets.all(10.0),
                     child: CircularProgressIndicator())
                 : FlutterMap(
@@ -214,7 +214,7 @@ class MapComponentState extends State<MapComponent> {
                         height: 80.0,
                         point: LatLng(getfirstPosition()!.latitude, getfirstPosition()!.longitude),
                         builder: (ctx) => Container(
-                          child: Icon(Icons.flag, color: Colors.green, size: 40.0),
+                          child: const Icon(Icons.flag, color: Colors.green, size: 40.0),
                         ),
                       ),
                       if (getlastPosition() != null)
@@ -223,7 +223,7 @@ class MapComponentState extends State<MapComponent> {
                           height: 80.0,
                           point: LatLng(getlastPosition()!.latitude, getlastPosition()!.longitude),
                           builder: (ctx) => Container(
-                            child: Icon(Icons.flag, color: Colors.red, size: 40.0),
+                            child: const Icon(Icons.flag, color: Colors.red, size: 40.0),
                           ),
                         ),
                     ],

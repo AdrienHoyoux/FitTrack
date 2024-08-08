@@ -129,6 +129,11 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 
 ### **`Connexion et inscription`**
  - Un utilisateur peut décider de créér un compte ou de se connecter à son compte existant.
+ ![Gif de la connexion et création de compte](imageReadme/gif/RegisterAndConnexion.gif)
+
+### **`Réinitialisation du mot de passe`**
+- Un utilisateur peut réinitialiser son mot de passe en cas d'oubli.
+ ![Gif de la réinitialisation du mot de passe](imageReadme/gif/ResetPassword.gif)
 
 ### **`Profil utilisateur`**
 - Un utilisateur peut voir et modifier son profil. Il peut voir son nom, son âge, sa biographie et son poids et sa photo de profil. Il peut également modifier son poids, sa biographie et sa photo de profil.

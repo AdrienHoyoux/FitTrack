@@ -3,7 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'package:intl/intl.dart';
-
 import '../services/database_service.dart';
 import '../screens/main_screen.dart';
 import '../classes/app_user.dart';
@@ -11,33 +10,26 @@ import '../classes/app_user.dart';
 class UserInfoComponent extends StatefulWidget {
   static const String routeName = '/userinfo';
   UserInfoComponent({super.key});
-
   @override
   _UserInfoComponentState createState() => _UserInfoComponentState();
 }
-
 class _UserInfoComponentState extends State<UserInfoComponent> {
-
   // ********************************* Instance ********************************* //
   DatabaseService _databaseService = DatabaseService();
 
   // ********************************* Variables ********************************* //
-
   PlatformFile? pickedFile;
-
   DateTime selectedDate = DateTime.now();
-
   final _formKey = GlobalKey<FormState>();
-
   TextEditingController _dateController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _firstNameController = TextEditingController();
   TextEditingController _bioController = TextEditingController();
   TextEditingController _weightController = TextEditingController();
-
   String imageUserURL_default = '';
-  // ********************************* Methodes ********************************* //
+  static const int time_snackbar = 3;
 
+  // ********************************* Methodes ********************************* //
   @override
   void initState() {
     super.initState();
@@ -50,16 +42,13 @@ class _UserInfoComponentState extends State<UserInfoComponent> {
 
   Future<void> getImage() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles();
-
     if (result == null) return;
-
     setState(() {
       pickedFile = result.files.first;
     });
   }
 
   Future<void> submitButton() async {
-
     if(pickedFile != null) _databaseService.uploadFile(pickedFile!);
 
     if (_formKey.currentState!.validate()) {
@@ -78,6 +67,7 @@ class _UserInfoComponentState extends State<UserInfoComponent> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text('Votre profil à été mis à jour avec succès !'),
+          duration: Duration(seconds: time_snackbar),
         ),
       );
     }
@@ -107,7 +97,6 @@ class _UserInfoComponentState extends State<UserInfoComponent> {
   }
 
   // ********************************* Scaffold ********************************* //
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
