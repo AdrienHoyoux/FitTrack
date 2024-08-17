@@ -70,10 +70,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       pickedFile = result.files.first;
     });
-
-    if (pickedFile != null) {
-      await _databaseService.uploadFile(pickedFile!);
-    }
   }
 
   // **************************** Scaffold **************************** //
@@ -243,6 +239,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onPressed: () async {
                           Navigator.pop(context);
                           await _databaseService.updateUser(user);
+                          if (pickedFile != null) {
+                            await _databaseService.uploadFile(pickedFile!);
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 5.0,

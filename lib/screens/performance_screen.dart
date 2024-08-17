@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:myappflutter/classes/race.dart';
-import 'package:myappflutter/screens/map_screen.dart';
-import 'package:myappflutter/screens/raceDetailsScreen.dart';
-import 'package:myappflutter/services/database_service.dart';
+import 'package:FitTrack/classes/race.dart';
+import 'package:FitTrack/screens/raceDetailsScreen.dart';
+import 'package:FitTrack/services/database_service.dart';
+
+import 'main_screen.dart';
 
 class PerformanceScreen extends StatefulWidget {
   static const String routeName = '/performance';
@@ -14,6 +15,8 @@ class PerformanceScreen extends StatefulWidget {
 
 class _PerformanceScreenState extends State<PerformanceScreen> {
   final DatabaseService _databaseService = DatabaseService();
+  bool isDeletedMode = false;
+  int? indexRace;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,12 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
                   SizedBox(height: 20),
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, MapScreen.routeName);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => MainScreen(initialIndex: 1),
+                        ),
+                      );
                     },
                     child: Text('Démarrer une course !'),
                   ),
@@ -64,10 +72,14 @@ class _PerformanceScreenState extends State<PerformanceScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => RaceDetailScreen(race: race),
+                          builder: (context) => RaceDetailScreen(
+                            race: race,
+                            raceId: race.id!,
+                          ),
                         ),
                       );
                     },
+
                   ),
                 );
               },

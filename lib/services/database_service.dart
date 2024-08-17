@@ -3,8 +3,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart' as FA;
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:myappflutter/classes/firebase_exception.dart';
-import 'package:myappflutter/classes/race.dart';
+import 'package:FitTrack/classes/firebase_exception.dart';
+import 'package:FitTrack/classes/race.dart';
 import '../classes/app_user.dart';
 
 const String USERS_COLLECTION_REF = 'users';
@@ -84,6 +84,76 @@ class DatabaseService {
     }
   }
 
+  Future<Appuser?> getCurrentUser() async {
+    FA.User? firebaseUser = _auth.currentUser;
+    if (firebaseUser != null) {
+      DocumentSnapshot<Appuser> docSnapshot = await _usersRef.doc(firebaseUser.uid).get();
+      return docSnapshot.data();
+    }
+    return null;
+  }
+
+  Future<void> updateUser(Appuser user) async {
+    try {
+      FA.User? firebaseUser = _auth.currentUser;
+      if (firebaseUser != null) {
+        String uid = firebaseUser.uid;
+        _usersRef.doc(uid).update(user.toJson());
+      } else {
+        print("Erreur: Aucun utilisateur connecté");
+      }
+    } catch (e) {
+      print("Erreur lors de la mise à jour de l'utilisateur : $e");
+    }
+  }
+
+  Future<void> deleteUser() async {
+    try {
+      FA.User? firebaseUser = _auth.currentUser;
+      if (firebaseUser != null) {
+        String uid = firebaseUser.uid;
+        await _usersRef.doc(uid).delete();
+        await firebaseUser.delete();
+      }
+    } catch (e) {
+      print("Erreur lors de la suppression de l'utilisateur : $e");
+    }
+  }
+
+  Future<double> getUserWeight() async{
+    try {
+      FA.User? firebaseUser = _auth.currentUser;
+      if (firebaseUser != null) {
+        String uid = firebaseUser.uid;
+        DocumentSnapshot<Appuser> docSnapshot = await _usersRef.doc(uid).get();
+        double weight = double.tryParse(docSnapshot.data()!.weight!) ?? 0.0;
+        return weight;
+      }
+      return 0.0;
+    } catch (e) {
+      print("Erreur lors de la récupération du poids de l'utilisateur : $e");
+      return 0;
+    }
+  }
+
+  Future<void> signOut() async {
+    try {
+      await _auth.signOut();
+    } catch (e) {
+      print("Erreur lors de la déconnexion : $e");
+    }
+  }
+
+  Future<String?> loadImage(String path) async {
+    try {
+      final url = await _firebase_storage.child(path).getDownloadURL();
+      return url;
+    } catch (e) {
+      print('Error loading image: $e');
+      return null;
+    }
+  }
+
   Future<void> uploadFile(PlatformFile pickedFile) async {
     try {
       FA.User? firebaseUser = _auth.currentUser;
@@ -107,59 +177,33 @@ class DatabaseService {
     }
   }
 
-  Future<Appuser?> getCurrentUser() async {
-    FA.User? firebaseUser = _auth.currentUser;
-    if (firebaseUser != null) {
-      DocumentSnapshot<Appuser> docSnapshot = await _usersRef.doc(firebaseUser.uid).get();
-      return docSnapshot.data();
-    }
-    return null;
-  }
+  //******************************* RACE *******************************//
 
-
-
-  Future<void> updateUser(Appuser user) async {
+  Future<List<Race>> getRaces() async {
     try {
-      FA.User? firebaseUser = _auth.currentUser;
+      FA.User? firebaseUser = FA.FirebaseAuth.instance.currentUser;
       if (firebaseUser != null) {
         String uid = firebaseUser.uid;
-        _usersRef.doc(uid).update(user.toJson());
+
+        CollectionReference racesRef = _firestore
+            .collection(USERS_COLLECTION_REF)
+            .doc(uid)
+            .collection(RACES_COLLECTION_REF);
+
+        QuerySnapshot snapshot = await racesRef.get();
+
+        List<Race> races = snapshot.docs
+            .map((doc) => Race.fromJson(doc.data() as Map<String, dynamic>, id: doc.id))
+            .toList();
+
+        return races;
       } else {
         print("Erreur: Aucun utilisateur connecté");
+        return [];
       }
     } catch (e) {
-      print("Erreur lors de la mise à jour de l'utilisateur : $e");
-    }
-  }
-
-  Future<String?> loadImage(String path) async {
-    try {
-      final url = await _firebase_storage.child(path).getDownloadURL();
-      return url;
-    } catch (e) {
-      print('Error loading image: $e');
-      return null;
-    }
-  }
-
-  Future<void> signOut() async {
-    try {
-      await _auth.signOut();
-    } catch (e) {
-      print("Erreur lors de la déconnexion : $e");
-    }
-  }
-
-  Future<void> deleteUser() async {
-    try {
-      FA.User? firebaseUser = _auth.currentUser;
-      if (firebaseUser != null) {
-        String uid = firebaseUser.uid;
-        await _usersRef.doc(uid).delete();
-        await firebaseUser.delete();
-      }
-    } catch (e) {
-      print("Erreur lors de la suppression de l'utilisateur : $e");
+      print("Erreur lors de la récupération des courses : $e");
+      return [];
     }
   }
 
@@ -176,49 +220,22 @@ class DatabaseService {
     }
   }
 
-
-  Future<double> getUserWeight() async{
+  Future<void> deleteRace(String raceId) async {
     try {
       FA.User? firebaseUser = _auth.currentUser;
       if (firebaseUser != null) {
         String uid = firebaseUser.uid;
-        DocumentSnapshot<Appuser> docSnapshot = await _usersRef.doc(uid).get();
-        double weight = double.tryParse(docSnapshot.data()!.weight!) ?? 0.0;
-        return weight;
-      }
-      return 0.0;
-    } catch (e) {
-      print("Erreur lors de la récupération du poids de l'utilisateur : $e");
-      return 0;
-    }
-  }
 
-  Future<List<Race>> getRaces() async {
-    try {
-      FA.User? firebaseUser = FA.FirebaseAuth.instance.currentUser;
-      if (firebaseUser != null) {
-        String uid = firebaseUser.uid;
+        DocumentReference raceRef = _usersRef.doc(uid).collection(RACES_COLLECTION_REF).doc(raceId);
+        await raceRef.delete();
+        print("Course supprimée !");
 
-        CollectionReference racesRef = _firestore
-            .collection(USERS_COLLECTION_REF)
-            .doc(uid)
-            .collection(RACES_COLLECTION_REF);
-
-        QuerySnapshot snapshot = await racesRef.get();
-
-        List<Race> races = snapshot.docs
-            .map((doc) => Race.fromJson(doc.data() as Map<String, dynamic>))
-            .toList();
-
-        return races;
-      }
-      else {
+      } else {
         print("Erreur: Aucun utilisateur connecté");
-        return [];
       }
     } catch (e) {
-      print("Erreur lors de la récupération des courses : $e");
-      return [];
+      print("Erreur lors de la suppression de la course : $e");
     }
   }
+
 }

@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:myappflutter/screens/performance_screen.dart';
-import 'package:myappflutter/screens/profile_screen.dart';
-import 'package:myappflutter/screens/settings_screen.dart';
+import 'package:FitTrack/screens/performance_screen.dart';
+import 'package:FitTrack/screens/profile_screen.dart';
+import 'package:FitTrack/screens/settings_screen.dart';
 import 'home_screen.dart';
 import 'map_screen.dart';
 
 class MainScreen extends StatefulWidget {
   static String routeName = '/main';
-  MainScreen({super.key});
+
+  final int initialIndex;
+
+  MainScreen({Key? key, this.initialIndex = 0}) : super(key: key); // Ajout du paramètre initialIndex
 
   @override
   _MainScreenState createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-  int value = 0;
   int _currentIndex = 0;
 
   final tabs = [
@@ -25,22 +26,31 @@ class _MainScreenState extends State<MainScreen> {
   ];
 
   @override
-  Widget build(BuildContext context){
+  void initState() {
+    super.initState();
+    _currentIndex = widget.initialIndex; // Initialiser avec le paramètre initialIndex
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar : AppBar(
+      appBar: AppBar(
         backgroundColor: Colors.black45,
         automaticallyImplyLeading: false,
-        title: Text('FitTrack',style: TextStyle(fontSize: 30.0,fontWeight: FontWeight.bold,color: Colors.white),),
+        title: Text(
+          'FitTrack',
+          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold, color: Colors.white),
+        ),
         actions: [
           IconButton(
-            icon: Icon(Icons.account_circle,size: 35.0,color: Colors.white),
-            onPressed: (){
-             Navigator.pushNamed(context, ProfileScreen.routeName);
+            icon: Icon(Icons.account_circle, size: 35.0, color: Colors.white),
+            onPressed: () {
+              Navigator.pushNamed(context, ProfileScreen.routeName);
             },
           ),
           IconButton(
-            icon: Icon(Icons.settings,size: 35.0,color: Colors.white),
-            onPressed: (){
+            icon: Icon(Icons.settings, size: 35.0, color: Colors.white),
+            onPressed: () {
               Navigator.pushNamed(context, SettingsScreen.routeName);
             },
           ),
@@ -49,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
       body: tabs[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
-        onTap: (index){
+        onTap: (index) {
           setState(() {
             _currentIndex = index;
           });
@@ -67,7 +77,6 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.sports_score),
             label: 'Performances',
           ),
-
         ],
       ),
     );

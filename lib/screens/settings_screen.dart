@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:myappflutter/screens/connexion_screen.dart';
-import 'package:myappflutter/services/database_service.dart';
-import 'package:myappflutter/widgets/component/setting_card_component.dart';
+import 'package:FitTrack/screens/connexion_screen.dart';
+import 'package:FitTrack/services/database_service.dart';
+import 'package:FitTrack/widgets/component/setting_card_component.dart';
 
 class SettingsScreen extends StatefulWidget {
   static const String routeName = '/settings';

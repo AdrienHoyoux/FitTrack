@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myappflutter/notifier/course_state_notifier.dart';
+import 'package:FitTrack/notifier/course_state_notifier.dart';
 import 'package:provider/provider.dart';
 
 class CourseStat extends StatefulWidget {

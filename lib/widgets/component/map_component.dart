@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:myappflutter/services/database_service.dart';
+import 'package:FitTrack/services/database_service.dart';
 import 'dart:async';
 import 'package:provider/provider.dart';
 import '../../notifier/course_state_notifier.dart';
@@ -131,7 +131,7 @@ class MapComponentState extends State<MapComponent> {
       met = 13.5;
     }
 
-    double activeHours = _activeDuration.inSeconds / 3600.0; // Convertir la durée active en heures
+    double activeHours = _activeDuration.inSeconds / 3600.0;
     double caloriesBurned = met * _userWeight * activeHours;
     courseState.calories = caloriesBurned;
   }

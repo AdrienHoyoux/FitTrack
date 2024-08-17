@@ -9,6 +9,7 @@ class ActionButton extends StatelessWidget {
   final Color borderColor;
   final double elevation;
   final double borderRadius;
+  final double width;
 
   const ActionButton({
     Key? key,
@@ -20,13 +21,14 @@ class ActionButton extends StatelessWidget {
     this.borderColor = Colors.blueGrey,
     this.elevation = 0.0,
     this.borderRadius = 10.0,
+    this.width = 250,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 50,
-      width: 250,
+      width: width,
       child: ElevatedButton(
         onPressed: onPressed,
         child: Text(

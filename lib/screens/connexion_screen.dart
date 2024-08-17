@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:myappflutter/classes/app_user.dart';
-import 'package:myappflutter/screens/register_screen.dart';
-import 'package:myappflutter/screens/resetpassword_screen.dart';
-import 'package:myappflutter/screens/userinfo_screen.dart';
+import 'package:FitTrack/classes/app_user.dart';
+import 'package:FitTrack/screens/register_screen.dart';
+import 'package:FitTrack/screens/resetpassword_screen.dart';
+import 'package:FitTrack/screens/userinfo_screen.dart';
 import '../classes/firebase_exception.dart';
 import '../services/database_service.dart';
 import '../widgets/button/action _button.dart';

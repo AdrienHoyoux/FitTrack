@@ -147,6 +147,9 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 ### **`Mise en pause d'une course`**
 - Un utilisateur peut mettre en pause sa course en appuyant sur un bouton.
 
+### **`Suppression d'une course`**
+- Un utilisateur peut décider de supprimer une course de ses performances
+
 ### **`Annulation d'une course`**
 - Un utilisateur peut annuler sa course en appuyant sur un bouton. Ceci viendra réinitialiser les statistiques de la course et supprimer son parcours sur la carte.
 

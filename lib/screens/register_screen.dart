@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myappflutter/widgets/field/emailField.dart';
+import 'package:FitTrack/widgets/field/emailField.dart';
 import '../classes/firebase_exception.dart';
 import '../services/database_service.dart';
 import '../classes/app_user.dart';

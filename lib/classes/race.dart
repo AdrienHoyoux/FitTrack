@@ -1,4 +1,6 @@
 class Race {
+
+  String? id;
   String? name;
   final String date;
   final String time;
@@ -7,6 +9,7 @@ class Race {
   final double calories;
 
   Race({
+    this.id,
     this.name,
     required this.date,
     required this.time,
@@ -15,8 +18,9 @@ class Race {
     required this.calories,
   });
 
-  factory Race.fromJson(Map<String, dynamic> json) {
+  factory Race.fromJson(Map<String, dynamic> json, {String? id}) {
     return Race(
+      id: id,
       name: json['name'],
       date: json['date'],
       time: json['time'],
