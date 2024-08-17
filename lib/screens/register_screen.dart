@@ -3,7 +3,7 @@ import 'package:FitTrack/widgets/field/emailField.dart';
 import '../classes/firebase_exception.dart';
 import '../services/database_service.dart';
 import '../classes/app_user.dart';
-import '../widgets/button/action _button.dart';
+import '../widgets/buttons/action _button.dart';
 import '../widgets/field/passwordField.dart';
 
 class RegisterScreen extends StatefulWidget {

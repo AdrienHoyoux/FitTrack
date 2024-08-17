@@ -18,22 +18,36 @@
 
 ## 📁 Présentation des principaux dossiers
 
-### **`classes`**
+### **`classes/`**
 Ce répertoire contient les classes représentant les données de l'application. Vous y trouverez les modèles de données utilisés dans toute l'application.
 
-### **`screens`**
+### **`screens/`**
 Ce répertoire regroupe les différentes pages de l'application. Chaque page de l'interface utilisateur est définie ici.
 
-### **`widgets`**
-Ce répertoire contient les widgets personnalisés qui sont utilisés pour la page permettant le lancement d'une course. Ces widgets correspondent à la carte et au statistique affichée lors de sa course.
+### **`widgets/`**
+Ce répertoire contient les widgets personnalisés utilisés dans toute l'application. Il est organisé en plusieurs sous-répertoires, chacun regroupant des types spécifiques de widgets :
 
-### **`services`**
+- **`buttons/`** : Contient divers types de boutons personnalisés pouvant être utilisés dans l'application. Exemples de boutons :
+
+    - `action_button`
+    - `custom_text_button`
+  
+
+- **`components/`** : Regroupe des composants réutilisables qui peuvent être intégrés dans l'application. Cela inclut des éléments comme des cartes, des modals, ...
+
+
+- **`fields/`** : Ce sous-répertoire rassemble des widgets liés aux champs de saisie et aux formulaires.
+
+Chaque sous-répertoire est conçu pour offrir des widgets spécifiques afin de maintenir une organisation claire et faciliter la réutilisation des composants dans l'application.
+
+
+### **`services/`**
 Ce répertoire regroupe les interactions avec les services externes, tels que Firebase. Vous y trouverez une classe `DatabaseService` qui gère les interactions avec la base de données.
 
-### ***`notifiers`***
+### ***`notifiers/`***
 Ce répertoire contient une classe qui étend la classe `ChangeNotifier` de Flutter. Il est utilisé pour gérer l'état de l'application et notifier les widgets lorsqu'un changement d'état se produit.
 
-### **`routes`**
+### **`routes/`**
 Ce répertoire contient les différentes routes de l'application. Ces grâce à ces routes que l'on peut naviguer entre les différentes pages de l'application.
 
 ## 📱 Aperçu de la maquette
@@ -101,7 +115,7 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 <div style="text-align:center; margin-bottom: 40px">
   <h4>Page des statistiques d'une course</h4>
   <img src="imageReadme/DetailRaceScreen.png" alt="Page des statistiques d'une course" width="300"/>
-  <p>Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées.</p>
+  <p>Cette page permet à l'utilisateur de voir les statistiques d'une course en particulier. Il pourra voir la distance parcourue, le temps écoulé, la vitesse moyenne et les calories dépensées. De plus, il pourra supprimer cette dernière, s'il le désire.</p>
 </div>
 
 
@@ -129,41 +143,70 @@ Ce répertoire contient les différentes routes de l'application. Ces grâce à 
 
 ### **`Connexion et inscription`**
  - Un utilisateur peut décider de créér un compte ou de se connecter à son compte existant.
- ![Gif de la connexion et création de compte](imageReadme/gif/RegisterAndConnexion.gif)
+ 
+![Gif de la connexion et création de compte](imageReadme/gif/RegisterAndConnexion.gif)
 
 ### **`Réinitialisation du mot de passe`**
 - Un utilisateur peut réinitialiser son mot de passe en cas d'oubli.
- ![Gif de la réinitialisation du mot de passe](imageReadme/gif/ResetPassword.gif)
+ 
+![Gif de la réinitialisation du mot de passe](imageReadme/gif/ResetPassword.gif)
+
+### **`Navigation dans l'application`**
+- un utilisateur peut naviguer entre 3 pages différentes grâce à une bottomNavigationBar.
+  
+![Gif de la navation de l'application](imageReadme/gif/navigation.gif)
 
 ### **`Profil utilisateur`**
 - Un utilisateur peut voir et modifier son profil. Il peut voir son nom, son âge, sa biographie et son poids et sa photo de profil. Il peut également modifier son poids, sa biographie et sa photo de profil.
+  
+![Gif du profil utilisateur](imageReadme/gif/profilUtilisateur.gif)
 
 ### **`Lancement d'une course`**
 - Un utilisateur peut lancer une course en appuyant sur un bouton. Il peut voir sa position sur une carte interactive et les statistiques de sa course en temps réel.
+  
+![Gif du lancement de course](imageReadme/gif/startRace.gif)
 
 ### **`Enregistrement d'une course`**
 - Un utilisateur peut enregistrer sa course en appuyant sur un bouton. Il peut voir les statistiques de sa course, lui ajouter un nom et les enregistrer dans la base de données.
+  
+![Gif de l'enregistrement d'une course](imageReadme/gif/saveRace.gif)
 
 ### **`Mise en pause d'une course`**
 - Un utilisateur peut mettre en pause sa course en appuyant sur un bouton.
-
-### **`Suppression d'une course`**
-- Un utilisateur peut décider de supprimer une course de ses performances
+ 
+![Gif de la mise en pause de course](imageReadme/gif/pauseRace.gif)
 
 ### **`Annulation d'une course`**
 - Un utilisateur peut annuler sa course en appuyant sur un bouton. Ceci viendra réinitialiser les statistiques de la course et supprimer son parcours sur la carte.
+  
+![Gif annulation de course](imageReadme/gif/cancelRace.gif)
 
-### **`Réinitialisation du mot de passe`**
-- Un utilisateur peut réinitialiser son mot de passe en appuyant sur un bouton. Il recevra un e-mail avec un lien pour réinitialiser son mot de passe.
 
 ### **`Suppression du compte`**
 - Un utilisateur peut supprimer son compte en appuyant sur un bouton. Il devra faire une confirmation avant de supprimer son compte.
+  
+![Gif de la suppression de compte](imageReadme/gif/deleteAccount.gif)
 
 ### **`Déconnexion`**
 - Un utilisateur peut se déconnecter de son compte en appuyant sur un bouton.
+  
+![Gif de la déconnexion au compte](imageReadme/gif/signout.gif)
+
 
 ### **`Consultation des courses effectuées`**
 - Un utilisateur peut voir les différentes courses qu'il a effectuées. Il peut voir les statistiques de chaque course en cliquant sur l'une d'elles.
+  
+![Gif de la Consultation des courses effectuées](imageReadme/gif/watchRace.gif)
+
+### **`Suppression d'une course`**
+- Un utilisateur peut décider de supprimer une course de ses performances
+  
+![Gif de suppression d'une course](imageReadme/gif/deleteRace.gif)
+
+### **`Lancement d'une course depuis l'onglet des performances`**
+- Si un utilisateur n'a pas encore réalisé de course et qu'il accède à l'onglet des performances, ce derniers lui indiquera qu'il peut lancer une course et le redirigera vers l'onglet Carte.
+
+![Gif de lancement de course depuis performance](imageReadme/gif/startRacePerformance.gif)
 
 ## 🔍 Etude de l'existant
 <div style="text-align: center;">

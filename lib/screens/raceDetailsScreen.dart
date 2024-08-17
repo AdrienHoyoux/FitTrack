@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:FitTrack/classes/race.dart';
 import 'package:FitTrack/screens/main_screen.dart';
-import 'package:FitTrack/widgets/button/action%20_button.dart';
+import 'package:FitTrack/widgets/buttons/action%20_button.dart';
 import 'package:FitTrack/widgets/component/dialog_component.dart';
 
 import '../services/database_service.dart';

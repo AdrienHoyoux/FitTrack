@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:FitTrack/widgets/button/action%20_button.dart';
+import 'package:FitTrack/widgets/buttons/action%20_button.dart';
 import 'package:FitTrack/widgets/field/emailField.dart';
 import '../classes/firebase_exception.dart';
 import '../services/database_service.dart';
