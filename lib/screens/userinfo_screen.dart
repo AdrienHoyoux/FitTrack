@@ -7,13 +7,13 @@ import '../services/database_service.dart';
 import '../screens/main_screen.dart';
 import '../classes/app_user.dart';
 
-class UserInfoComponent extends StatefulWidget {
+class UserInfoScreen extends StatefulWidget {
   static const String routeName = '/userinfo';
-  UserInfoComponent({super.key});
+  UserInfoScreen({super.key});
   @override
-  _UserInfoComponentState createState() => _UserInfoComponentState();
+  _UserInfoScreenState createState() => _UserInfoScreenState();
 }
-class _UserInfoComponentState extends State<UserInfoComponent> {
+class _UserInfoScreenState extends State<UserInfoScreen> {
   // ********************************* Instance ********************************* //
   DatabaseService _databaseService = DatabaseService();
 

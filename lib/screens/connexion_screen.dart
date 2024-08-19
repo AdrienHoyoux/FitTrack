@@ -36,7 +36,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
       waiting = true;
     });
     if (mailController.text == 'admin' && passwordController.text == 'admin') {
-      Navigator.pushNamed(context, UserInfoComponent.routeName);
+      Navigator.pushNamed(context, UserInfoScreen.routeName);
     }
     else {
       if (_formKey.currentState!.validate()) {
@@ -49,7 +49,7 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
           Appuser? appUser = await _dataBaseService.getCurrentUser();
 
           if (appUser != null && appUser.firstConnection!) {
-            Navigator.pushNamed(context, UserInfoComponent.routeName);
+            Navigator.pushNamed(context, UserInfoScreen.routeName);
           } else {
             Navigator.pushNamed(context, MainScreen.routeName);
           }

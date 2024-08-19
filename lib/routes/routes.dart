@@ -22,7 +22,7 @@ var routes = <String, WidgetBuilder>{
   RegisterScreen.routeName: (context) =>  RegisterScreen(),
   ConnexionScreen.routeName: (context) =>  ConnexionScreen(),
   MainScreen.routeName: (context) =>  MainScreen(),
-  UserInfoComponent.routeName: (context) =>  UserInfoComponent(),
+  UserInfoScreen.routeName: (context) =>  UserInfoScreen(),
   SaveRaceScreen.routeName: (context) {
     final Race course = ModalRoute.of(context)!.settings.arguments as Race;
     return SaveRaceScreen(course: course);
