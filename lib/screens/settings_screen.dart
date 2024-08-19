@@ -98,12 +98,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
         child: Column(
           children: <Widget>[
             SizedBox(height: 20.0),
-            SettingsCard(icon: Icons.delete_forever,
+            SettingsCard(
+                icon: Icons.delete_forever,
                 title: 'Supprimer le compte',
                 color: Colors.red,
                 onPressed: _showDeleteAccountDialog),
             SizedBox(height: 20.0),
-            SettingsCard(icon: Icons.logout,
+            SettingsCard(
+                icon: Icons.logout,
                 title: 'Déconnexion',
                 color: Colors.blue,
                 onPressed: _showLogoutDialog),

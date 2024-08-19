@@ -10,7 +10,7 @@ class MainScreen extends StatefulWidget {
 
   final int initialIndex;
 
-  MainScreen({Key? key, this.initialIndex = 0}) : super(key: key); // Ajout du paramètre initialIndex
+  MainScreen({Key? key, this.initialIndex = 0}) : super(key: key);
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -28,7 +28,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
-    _currentIndex = widget.initialIndex; // Initialiser avec le paramètre initialIndex
+    _currentIndex = widget.initialIndex;
   }
 
   @override

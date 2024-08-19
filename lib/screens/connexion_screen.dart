@@ -35,34 +35,29 @@ class _ConnexionScreenState extends State<ConnexionScreen> {
     setState(() {
       waiting = true;
     });
-    if (mailController.text == 'admin' && passwordController.text == 'admin') {
-      Navigator.pushNamed(context, UserInfoScreen.routeName);
-    }
-    else {
-      if (_formKey.currentState!.validate()) {
-        _status = await _dataBaseService.signInUser(
-          mailController.text,
-          passwordController.text,
+    if (_formKey.currentState!.validate()) {
+      _status = await _dataBaseService.signInUser(
+        mailController.text,
+        passwordController.text,
+      );
+
+      if (_status == AuthStatus.successful) {
+        Appuser? appUser = await _dataBaseService.getCurrentUser();
+
+        if (appUser != null && appUser.firstConnection!) {
+          Navigator.pushNamed(context, UserInfoScreen.routeName);
+        } else {
+          Navigator.pushNamed(context, MainScreen.routeName);
+        }
+      }
+      else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(AuthExceptionHandler.generateErrorMessage(_status), style: const TextStyle(color: Colors.white, fontSize: 16)),
+            duration: const Duration(seconds: 3),
+            backgroundColor: Colors.red,
+          ),
         );
-
-        if (_status == AuthStatus.successful) {
-          Appuser? appUser = await _dataBaseService.getCurrentUser();
-
-          if (appUser != null && appUser.firstConnection!) {
-            Navigator.pushNamed(context, UserInfoScreen.routeName);
-          } else {
-            Navigator.pushNamed(context, MainScreen.routeName);
-          }
-        }
-        else {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(AuthExceptionHandler.generateErrorMessage(_status), style: const TextStyle(color: Colors.white, fontSize: 16)),
-              duration: const Duration(seconds: 3),
-              backgroundColor: Colors.red,
-            ),
-          );
-        }
       }
     }
     setState(() {

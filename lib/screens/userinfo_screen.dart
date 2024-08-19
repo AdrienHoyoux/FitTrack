@@ -100,166 +100,161 @@ class _UserInfoScreenState extends State<UserInfoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          ModalBarrier(dismissible: false, color: Colors.blueGrey),
-          Center(
-            child: Card(
-              elevation: 25.0,
-              margin: EdgeInsets.all(20.0),
-              child: Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: SingleChildScrollView(
-                  child: Form(
-                    key: _formKey,
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text('Compléter votre profil', style: TextStyle(fontSize: 30)),
-                        SizedBox(height: 10),
-                        Center(
-                          child: CircleAvatar(
-                            radius: 100,
-                            backgroundImage: pickedFile != null
-                                ? FileImage(File(pickedFile!.path!))
-                                : NetworkImage(imageUserURL_default),
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 130.0, left: 110.0),
-                              child: IconButton.filled(
-                                icon: Icon(Icons.edit, size: 25.0),
-                                onPressed: getImage,
-                                color: Colors.white,
-
-                              ),
-                            ),
+      backgroundColor: Colors.blue[200],
+      body: Center(
+        child: Card(
+          elevation: 25.0,
+          margin: EdgeInsets.all(20.0),
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text('Compléter votre profil', style: TextStyle(fontSize: 30)),
+                    SizedBox(height: 10),
+                    Center(
+                      child: CircleAvatar(
+                        radius: 100,
+                        backgroundImage: pickedFile != null
+                            ? FileImage(File(pickedFile!.path!))
+                            : NetworkImage(imageUserURL_default),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 130.0, left: 110.0),
+                          child: IconButton.filled(
+                            icon: Icon(Icons.edit, size: 25.0),
+                            onPressed: getImage,
+                            color: Colors.white,
                           ),
                         ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty){
-                              return 'Veuillez entrer un nom';
-                            }
-                            return null;
-                          },
-                          controller: _nameController,
-                          decoration: InputDecoration(
-                            labelText: 'Nom',
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            prefixIcon: Icon(Icons.person),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty){
-                              return 'Veuillez entrer un prénom';
-                            }
-                            return null;
-                          },
-                          controller: _firstNameController,
-                          decoration: InputDecoration(
-                            labelText: 'Prénom',
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            prefixIcon: Icon(Icons.person),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty ||RegExp(r'^\d+([.,]\d+)?$').hasMatch(value) == false){
-                              return 'Veuillez entrer un poids correcte';
-                            }
-                            return null;
-                          },
-                          controller: _weightController,
-                          keyboardType: TextInputType.numberWithOptions(decimal: true),
-                          decoration: InputDecoration(
-                            labelText: 'Poids',
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            prefixIcon: Icon(Icons.monitor_weight),
-                          ),
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          validator: (value) {
-                            if (value!.isEmpty){
-                              return 'Veuillez entrer une date de naissance';
-                            }
-                            return null;
-                          },
-                          controller: _dateController,
-                          decoration: InputDecoration(
-                            labelText: 'Date de naissance',
-                            filled: true,
-                            prefixIcon: Icon(Icons.calendar_today),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                          ),
-                          readOnly: true,
-                          onTap: () {
-                            _selectDate(context);
-                          },
-                        ),
-                        SizedBox(height: 10),
-                        TextFormField(
-                          controller: _bioController,
-                          decoration: InputDecoration(
-                            labelText: 'Biographie',
-                            filled: true,
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.blue),
-                            ),
-                            prefixIcon: Icon(Icons.description),
-                          ),
-                        ),
-                        SizedBox(height: 20),
-                        ElevatedButton(
-                          onPressed: submitButton,
-                          child: Text('Soumettre'),
-                          style: ElevatedButton.styleFrom(
-                            elevation: 5.0,
-                            backgroundColor: Colors.grey,
-                            foregroundColor: Colors.white,
-                            padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
-                            textStyle: TextStyle(
-                              fontSize: 24,
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty){
+                          return 'Veuillez entrer un nom';
+                        }
+                        return null;
+                      },
+                      controller: _nameController,
+                      decoration: InputDecoration(
+                        labelText: 'Nom',
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty){
+                          return 'Veuillez entrer un prénom';
+                        }
+                        return null;
+                      },
+                      controller: _firstNameController,
+                      decoration: InputDecoration(
+                        labelText: 'Prénom',
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        prefixIcon: Icon(Icons.person),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty ||RegExp(r'^\d+([.,]\d+)?$').hasMatch(value) == false){
+                          return 'Veuillez entrer un poids correcte';
+                        }
+                        return null;
+                      },
+                      controller: _weightController,
+                      keyboardType: TextInputType.numberWithOptions(decimal: true),
+                      decoration: InputDecoration(
+                        labelText: 'Poids',
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        prefixIcon: Icon(Icons.monitor_weight),
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty){
+                          return 'Veuillez entrer une date de naissance';
+                        }
+                        return null;
+                      },
+                      controller: _dateController,
+                      decoration: InputDecoration(
+                        labelText: 'Date de naissance',
+                        filled: true,
+                        prefixIcon: Icon(Icons.calendar_today),
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                      ),
+                      readOnly: true,
+                      onTap: () {
+                        _selectDate(context);
+                      },
+                    ),
+                    SizedBox(height: 10),
+                    TextFormField(
+                      controller: _bioController,
+                      decoration: InputDecoration(
+                        labelText: 'Biographie',
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide.none,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blue),
+                        ),
+                        prefixIcon: Icon(Icons.description),
+                      ),
+                    ),
+                    SizedBox(height: 20),
+                    ElevatedButton(
+                      onPressed: submitButton,
+                      child: Text('Soumettre'),
+                      style: ElevatedButton.styleFrom(
+                        elevation: 5.0,
+                        backgroundColor: Colors.grey,
+                        foregroundColor: Colors.white,
+                        padding: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+                        textStyle: TextStyle(
+                          fontSize: 24,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }

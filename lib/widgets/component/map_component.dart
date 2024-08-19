@@ -74,7 +74,7 @@ class MapComponentState extends State<MapComponent> {
   }
 
   void _startLocationUpdates(CourseStateNotifier courseState) {
-    _timer = Timer.periodic(const Duration(seconds: 5), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 2), (timer) {
       _determinePosition().then((value) {
         setState(() {
           _currentPosition = value;
@@ -83,7 +83,7 @@ class MapComponentState extends State<MapComponent> {
           courseState.speed = _currentPosition!.speed * 3.6;
 
           if (courseState.isRecording && !courseState.isPaused) {
-            _activeDuration += const Duration(seconds: 5);
+            _activeDuration += const Duration(seconds: 2);
           }
           calculCalorie(courseState);
           _mapController.move(LatLng(_currentPosition!.latitude, _currentPosition!.longitude),18.0);
